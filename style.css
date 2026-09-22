@@ -3,15 +3,22 @@
 ========================================================= */
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #f5f8fc;
-    color: #17345f;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f5faff 0%,
+            #f8fbff 100%
+        );
+
+    color: #14345f;
 }
 
 
@@ -21,52 +28,65 @@ body {
 
 .top-header {
     height: 88px;
+
     background: white;
-    border-bottom: 1px solid #dbe5f0;
+
+    border-bottom: 1px solid #d8e5f2;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    padding: 0 34px;
+    padding: 0 32px;
 }
 
-.header-left {
+.brand {
     display: flex;
+
     align-items: center;
-    gap: 16px;
+
+    gap: 15px;
 }
 
-.logo {
-    font-size: 42px;
-    color: #2878ff;
+.brand-icon {
+    font-size: 39px;
+
+    color: #287dff;
 }
 
-.header-left h1 {
+.brand h1 {
     font-size: 25px;
-    color: #102e59;
-    margin-bottom: 4px;
+
+    color: #102f5b;
+
+    margin-bottom: 5px;
 }
 
-.header-left p {
-    color: #7890ad;
+.brand p {
     font-size: 13px;
+
+    color: #6682a3;
 }
 
-.interactive-status {
-    border: 1px solid #bcdcff;
+.status-online {
+    border: 1px solid #9ee9d4;
+
+    color: #079c73;
+
+    background: #f2fffb;
+
     border-radius: 20px;
 
-    padding: 8px 16px;
+    padding: 9px 16px;
 
     font-size: 11px;
-    font-weight: bold;
 
-    color: #2878ff;
-    background: #f7fbff;
+    font-weight: bold;
 }
 
-.interactive-status span {
+.status-online span {
     display: inline-block;
 
     width: 8px;
@@ -74,9 +94,9 @@ body {
 
     border-radius: 50%;
 
-    background: #19b978;
+    background: #10b981;
 
-    margin-right: 7px;
+    margin-right: 6px;
 }
 
 
@@ -85,33 +105,36 @@ body {
 ========================================================= */
 
 .main-container {
-    max-width: 1450px;
+    max-width: 1500px;
 
-    margin: 24px auto;
+    margin: 20px auto;
 
-    padding: 0 22px;
+    padding: 0 24px;
 
     display: grid;
 
-    grid-template-columns: minmax(0, 3.1fr) minmax(300px, 1fr);
+    grid-template-columns:
+        minmax(0, 3.3fr)
+        minmax(330px, 1fr);
 
-    gap: 18px;
+    gap: 20px;
 }
 
 
 /* =========================================================
-   CARD
+   CARDS
 ========================================================= */
 
 .diagram-card,
 .detail-card {
     background: white;
 
-    border: 1px solid #d5e1ee;
+    border: 1px solid #d4e2f0;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
-    box-shadow: 0 2px 8px rgba(32, 68, 105, 0.06);
+    box-shadow:
+        0 3px 12px rgba(37, 77, 120, 0.07);
 
     overflow: hidden;
 }
@@ -121,91 +144,106 @@ body {
    DIAGRAM HEADER
 ========================================================= */
 
-.card-title {
+.diagram-header {
     height: 58px;
 
     padding: 0 18px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    border-bottom: 1px solid #dce6f0;
+    border-bottom: 1px solid #dce7f2;
+}
 
-    color: #163761;
+.diagram-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-weight: bold;
 
     font-size: 15px;
-    font-weight: bold;
+
+    color: #173c6b;
 }
 
-.card-title > div:first-child {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.diagram-icon {
+    font-size: 25px;
+
+    color: #267cff;
 }
 
-.title-icon {
-    font-size: 24px;
-    color: #2878ff;
-}
+.interactive-label {
+    border: 1px solid #afd2ff;
 
-.small-status {
-    border: 1px solid #bedbff;
+    background: #f3f8ff;
 
-    background: #f4f9ff;
+    color: #2377ec;
 
-    color: #2878ff;
+    border-radius: 18px;
 
-    border-radius: 20px;
-
-    padding: 6px 11px;
+    padding: 7px 12px;
 
     font-size: 9px;
+
+    font-weight: bold;
 }
 
 
 /* =========================================================
-   DIAGRAM
+   DIAGRAM AREA
 ========================================================= */
 
-.diagram-wrapper {
+.diagram-area {
     width: 100%;
 
-    padding: 10px 15px 0;
+    padding: 10px 12px 0;
 
-    overflow: hidden;
+    overflow-x: auto;
 }
 
-.diagram-wrapper svg {
+.diagram-area svg {
     display: block;
 
     width: 100%;
 
-    height: auto;
+    min-width: 800px;
 
-    min-height: 580px;
+    height: auto;
 }
 
 
 /* =========================================================
-   SVG GENERAL
+   SVG COMPONENT
 ========================================================= */
 
-.node {
+.component {
     cursor: pointer;
 
     transition:
-        transform 0.15s ease,
-        filter 0.15s ease;
+        opacity .15s ease,
+        filter .15s ease;
 }
 
-.node:hover {
-    filter: brightness(0.97);
-}
-
-.node.active {
+.component:hover {
     filter:
-        drop-shadow(0 0 6px rgba(37, 99, 235, 0.65));
+        drop-shadow(
+            0 0 5px
+            rgba(45, 117, 230, .35)
+        );
+}
+
+.component.selected {
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(30, 110, 255, .7)
+        );
 }
 
 
@@ -213,17 +251,16 @@ body {
    SOURCE
 ========================================================= */
 
-.source-node rect {
-    fill: #fff9e8;
+.source-component rect {
+    fill: #fff9e6;
 
-    stroke: #f2a900;
+    stroke: #f0a000;
 
     stroke-width: 2;
 }
 
-.source-node:hover rect,
-.source-node.active rect {
-    fill: #fff4ce;
+.source-component.selected rect {
+    fill: #fff0c4;
 }
 
 
@@ -231,26 +268,16 @@ body {
    PANEL
 ========================================================= */
 
-.panel-node rect {
-    fill: #f4f8ff;
+.panel-component rect {
+    fill: #edf5ff;
 
-    stroke: #347cff;
+    stroke: #2978ff;
 
     stroke-width: 2;
 }
 
-.panel-node:hover rect,
-.panel-node.active rect {
-    fill: #eaf2ff;
-}
-
-
-/* =========================================================
-   ATS
-========================================================= */
-
-.ats-node rect {
-    stroke-width: 2.5;
+.panel-component.selected rect {
+    fill: #dcecff;
 }
 
 
@@ -258,35 +285,16 @@ body {
    PROTECTION
 ========================================================= */
 
-.protection-node rect {
-    fill: #fff7f7;
+.protection-component rect {
+    fill: #fff8f8;
 
-    stroke: #ff4242;
+    stroke: #ff4040;
 
     stroke-width: 2;
 }
 
-.protection-node:hover rect,
-.protection-node.active rect {
-    fill: #fff0f0;
-}
-
-
-/* =========================================================
-   BUSBAR
-========================================================= */
-
-.busbar-node rect {
-    fill: #7c35ff;
-
-    stroke: #6e25e7;
-
-    stroke-width: 1;
-}
-
-.busbar-node:hover rect,
-.busbar-node.active rect {
-    filter: brightness(1.08);
+.protection-component.selected rect {
+    fill: #ffeaea;
 }
 
 
@@ -294,17 +302,16 @@ body {
    FEEDER
 ========================================================= */
 
-.feeder-node rect {
+.feeder-component rect {
     fill: #fff8f8;
 
-    stroke: #ff4747;
+    stroke: #ff4040;
 
     stroke-width: 2;
 }
 
-.feeder-node:hover rect,
-.feeder-node.active rect {
-    fill: #fff0f0;
+.feeder-component.selected rect {
+    fill: #ffeaea;
 }
 
 
@@ -312,135 +319,205 @@ body {
    OUTGOING
 ========================================================= */
 
-.outgoing-node rect {
-    fill: #f1fffb;
+.outgoing-component rect {
+    fill: #effff9;
 
-    stroke: #14a98c;
-
-    stroke-width: 1.7;
-}
-
-.outgoing-node:hover rect,
-.outgoing-node.active rect {
-    fill: #e4fff8;
-}
-
-
-/* =========================================================
-   SVG TEXT
-========================================================= */
-
-.node-title {
-    text-anchor: middle;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    fill: #193b68;
-}
-
-.node-subtitle {
-    text-anchor: middle;
-
-    font-size: 8.5px;
-
-    fill: #6b829d;
-}
-
-.tiny-text {
-    text-anchor: middle;
-
-    font-size: 7px;
-
-    fill: #8396ad;
-}
-
-.busbar-label {
-    font-size: 8px;
-
-    font-weight: bold;
-
-    fill: #7541ce;
-}
-
-
-/* =========================================================
-   WIRES
-========================================================= */
-
-.main-wire {
-    fill: none;
-
-    stroke: #71839a;
-
-    stroke-width: 3;
-}
-
-.outgoing-wire {
-    stroke: #64748b;
-
-    stroke-width: 3;
-
-    fill: none;
-}
-
-.phase-wire {
-    stroke: #7350df;
+    stroke: #0cae8c;
 
     stroke-width: 2;
 }
 
-.cabinet {
+.outgoing-component.selected rect {
+    fill: #dcfff5;
+}
+
+
+/* =========================================================
+   MDB
+========================================================= */
+
+.mdb-body {
     fill: #f8fafc;
 
-    stroke: #9bb2cc;
+    stroke: #91a9c3;
 
     stroke-width: 2;
 }
 
-.cabinet-header {
-    fill: #f4f8fd;
+.mdb-header {
+    fill: #f2f7fc;
 
-    stroke: #8da9c9;
+    stroke: #b7cce1;
 
     stroke-width: 1;
 }
 
-.green-dot {
-    fill: #18bd78;
+.voltage-label {
+    fill: #fff1f1;
+
+    stroke: #ff4141;
+
+    stroke-width: 1.5;
 }
 
-.cabinet-title {
+.voltage-text {
+    fill: #ed3737;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    text-anchor: middle;
+}
+
+.status-green {
+    fill: #16bd78;
+}
+
+.mdb-title {
+    fill: #2873cb;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+.active-text {
+    fill: #0ca47d;
+
     font-size: 9px;
 
-    fill: #3475c7;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   TEXT SVG
+========================================================= */
+
+.main-text {
+    text-anchor: middle;
+
+    fill: #173861;
+
+    font-size: 12px;
 
     font-weight: bold;
 }
 
-.cabinet-status {
+.sub-text {
+    text-anchor: middle;
+
+    fill: #6a829f;
+
     font-size: 8px;
-
-    fill: #14a98c;
-
-    font-weight: bold;
 }
 
-.neutral-bar {
-    fill: #1768df;
-}
-
-.pe-bar {
-    fill: #16a56e;
-}
-
-.bar-text {
+.switch-box {
     fill: white;
 
-    font-size: 15px;
+    stroke: #ff4040;
+
+    stroke-width: 2;
+}
+
+
+/* =========================================================
+   BUSBAR
+========================================================= */
+
+.busbar-component rect {
+    fill: #823cff;
+
+    stroke: #6b25e9;
+
+    stroke-width: 1;
+}
+
+.busbar-component circle {
+    fill: #ffd23c;
+
+    stroke: #7330d9;
+
+    stroke-width: 1;
+}
+
+.busbar-text {
+    fill: #6332bb;
+
+    font-size: 9px;
 
     font-weight: bold;
+}
+
+
+/* =========================================================
+   N / PE
+========================================================= */
+
+.neutral {
+    fill: #1769df;
+}
+
+.pe {
+    fill: #10a66e;
+}
+
+.bar-main {
+    fill: white;
+
+    text-anchor: middle;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+.bar-sub {
+    fill: white;
+
+    text-anchor: middle;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   PHASE WIRES
+========================================================= */
+
+.phase-r {
+    stroke: #f04444;
+
+    stroke-width: 2;
+}
+
+.phase-s {
+    stroke: #ffb000;
+
+    stroke-width: 2;
+}
+
+.phase-t {
+    stroke: #287cff;
+
+    stroke-width: 2;
+}
+
+.main-line {
+    fill: none;
+
+    stroke: #647c99;
+
+    stroke-width: 3;
+}
+
+.outgoing-line {
+    fill: none;
+
+    stroke: #647c99;
+
+    stroke-width: 2.5;
 }
 
 
@@ -449,11 +526,11 @@ body {
 ========================================================= */
 
 .legend {
-    min-height: 52px;
+    min-height: 55px;
 
-    border-top: 1px solid #dbe5ef;
+    border-top: 1px solid #dce6f0;
 
-    padding: 10px 18px;
+    padding: 11px 18px;
 
     display: flex;
 
@@ -465,14 +542,14 @@ body {
 
     font-size: 10px;
 
-    color: #536b88;
+    color: #526d8e;
 }
 
-.legend > span {
-    color: #657b96;
+.legend b {
+    color: #617994;
 }
 
-.legend > div {
+.legend span {
     display: flex;
 
     align-items: center;
@@ -480,49 +557,47 @@ body {
     gap: 6px;
 }
 
-.legend-box {
-    width: 11px;
+.legend i {
+    display: inline-block;
 
-    height: 11px;
+    width: 12px;
+
+    height: 12px;
 
     border-radius: 3px;
-
-    display: inline-block;
 }
 
-.legend-box.source {
-    background: #f2a900;
+.legend-source {
+    background: #f0a000;
 }
 
-.legend-box.panel {
-    background: #347cff;
+.legend-panel {
+    background: #287cff;
 }
 
-.legend-box.protection {
-    background: #ff4242;
+.legend-protection {
+    background: #ff4040;
 }
 
-.legend-box.busbar {
-    background: #7c35ff;
+.legend-busbar {
+    background: #823cff;
 }
 
-.legend-box.outgoing {
-    background: #14a98c;
+.legend-outgoing {
+    background: #0cae8c;
 }
 
 
 /* =========================================================
-   DETAIL CARD
+   DETAIL
 ========================================================= */
 
 .detail-card {
-    min-height: 650px;
+    min-height: 700px;
 }
 
-.detail-header {
+.detail-title {
     height: 58px;
-
-    border-bottom: 1px solid #dce6f0;
 
     display: flex;
 
@@ -532,65 +607,65 @@ body {
 
     padding: 0 18px;
 
-    font-size: 15px;
+    border-bottom: 1px solid #dce7f2;
+
+    font-size: 16px;
 
     font-weight: bold;
 
-    color: #163761;
+    color: #173c6b;
 }
 
-.info-icon {
-    color: #2878ff;
+.detail-title span {
+    font-size: 23px;
 
-    font-size: 21px;
+    color: #287cff;
 }
 
-.detail-content {
+.detail-body {
     padding: 20px;
 }
 
-.detail-label {
-    font-size: 9px;
+.label {
+    color: #5c80ae;
 
-    color: #69809d;
+    font-size: 10px;
 
     font-weight: bold;
 
-    letter-spacing: 0.4px;
-
     margin-bottom: 9px;
+
+    letter-spacing: .3px;
 }
 
-.detail-content h2 {
-    font-size: 17px;
+.detail-body h2 {
+    color: #102f5b;
+
+    font-size: 20px;
 
     line-height: 1.35;
-
-    color: #12345f;
-
-    margin-bottom: 18px;
 }
 
-.detail-divider {
+.separator {
     height: 1px;
 
-    background: #e1e8f0;
+    background: #e1e9f1;
 
-    margin: 16px 0;
+    margin: 19px 0;
 }
 
-.component-type {
+.type-badge {
     display: inline-block;
 
-    border: 1px solid #a9cbff;
+    background: #eef6ff;
 
-    background: #f1f7ff;
+    border: 1px solid #9ec9ff;
 
-    color: #2671d9;
+    color: #1972ed;
 
-    padding: 7px 10px;
+    padding: 8px 12px;
 
-    border-radius: 5px;
+    border-radius: 6px;
 
     font-size: 11px;
 
@@ -599,37 +674,45 @@ body {
 
 
 /* =========================================================
-   EXTRA INFORMATION
+   DETAIL INFORMATION
 ========================================================= */
 
-.extra-info {
-    margin-bottom: 18px;
+.information {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
 }
 
 .info-row {
-    padding: 8px 0;
+    display: grid;
 
-    border-bottom: 1px solid #edf1f5;
+    grid-template-columns: 125px 15px 1fr;
+
+    align-items: center;
+
+    font-size: 11px;
 }
 
-.info-row:last-child {
-    border-bottom: none;
+.info-icon {
+    font-size: 15px;
+
+    color: #5b86bc;
 }
 
-.info-label {
-    display: block;
+.info-key {
+    color: #5b79a0;
+}
 
-    color: #71859e;
+.info-colon {
+    color: #7891ae;
 
-    font-size: 9px;
-
-    margin-bottom: 4px;
+    text-align: center;
 }
 
 .info-value {
-    color: #25486f;
-
-    font-size: 11px;
+    color: #173e6b;
 
     font-weight: 600;
 }
@@ -640,15 +723,15 @@ body {
 ========================================================= */
 
 .description {
-    background: #f8fbff;
+    background: #f7fbff;
 
-    border: 1px solid #cddff3;
+    border: 1px solid #c7dcf2;
 
     border-radius: 6px;
 
     padding: 13px;
 
-    color: #526b89;
+    color: #4e6c91;
 
     font-size: 11px;
 
@@ -657,35 +740,35 @@ body {
 
 
 /* =========================================================
-   CLICK HELP
+   HELP
 ========================================================= */
 
-.click-help {
-    margin-top: 16px;
+.help-box {
+    margin-top: 17px;
 
-    border: 1px solid #d6e5f5;
+    border: 1px solid #cbdff3;
 
-    background: #f7fbff;
+    background: #f6fbff;
 
     border-radius: 6px;
 
-    padding: 13px;
+    padding: 12px;
 
-    color: #63809e;
+    display: flex;
+
+    gap: 10px;
+
+    color: #5d7ea5;
 
     font-size: 10px;
 
     line-height: 1.5;
-
-    display: flex;
-
-    gap: 8px;
 }
 
-.click-help span {
-    color: #2878ff;
+.help-box span {
+    color: #287cff;
 
-    font-size: 14px;
+    font-size: 15px;
 }
 
 
@@ -694,17 +777,17 @@ body {
 ========================================================= */
 
 footer {
-    text-align: center;
-
-    padding: 15px;
-
-    border-top: 1px solid #dbe5ef;
-
     background: white;
 
-    color: #7890ad;
+    border-top: 1px solid #dbe6f1;
+
+    text-align: center;
+
+    padding: 13px;
 
     font-size: 10px;
+
+    color: #7188a4;
 }
 
 
@@ -712,7 +795,7 @@ footer {
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
 
     .main-container {
         grid-template-columns: 1fr;
@@ -730,45 +813,39 @@ footer {
     .top-header {
         height: auto;
 
-        padding: 16px;
-
-        gap: 12px;
+        padding: 15px;
 
         align-items: flex-start;
     }
 
-    .header-left h1 {
+    .brand h1 {
         font-size: 18px;
     }
 
-    .header-left p {
+    .brand p {
         font-size: 10px;
     }
 
-    .logo {
-        font-size: 30px;
+    .brand-icon {
+        font-size: 28px;
     }
 
-    .interactive-status {
+    .status-online {
         display: none;
     }
 
     .main-container {
-        margin: 12px auto;
+        margin: 10px auto;
 
         padding: 0 8px;
     }
 
-    .diagram-wrapper svg {
-        min-height: 400px;
+    .diagram-area {
+        overflow-x: auto;
     }
 
-    .legend {
-        gap: 9px;
-
-        padding: 10px;
-
-        font-size: 8px;
+    .diagram-area svg {
+        min-width: 800px;
     }
 
 }
