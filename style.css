@@ -9,16 +9,19 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
     background:
         linear-gradient(
-            180deg,
-            #f5faff 0%,
-            #f8fbff 100%
+            135deg,
+            #f7fbff,
+            #eef7ff
         );
 
-    color: #14345f;
+    color: #173d75;
 }
 
 
@@ -26,12 +29,12 @@ body {
    HEADER
 ========================================================= */
 
-.top-header {
-    height: 88px;
+.header {
+    height: 82px;
 
-    background: white;
+    background: rgba(255,255,255,.95);
 
-    border-bottom: 1px solid #d8e5f2;
+    border-bottom: 1px solid #cfe2f7;
 
     display: flex;
 
@@ -42,61 +45,66 @@ body {
     padding: 0 32px;
 }
 
-.brand {
+.header-left {
     display: flex;
 
     align-items: center;
 
-    gap: 15px;
+    gap: 18px;
 }
 
-.brand-icon {
-    font-size: 39px;
+.logo {
+    font-size: 43px;
 
-    color: #287dff;
+    color: #287cff;
+
+    line-height: 1;
 }
 
-.brand h1 {
-    font-size: 25px;
+.header h1 {
+    font-size: 27px;
 
-    color: #102f5b;
+    color: #183f7b;
 
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+
+    font-weight: 700;
 }
 
-.brand p {
+.header p {
+    color: #6687b3;
+
     font-size: 13px;
-
-    color: #6682a3;
 }
 
-.status-online {
-    border: 1px solid #9ee9d4;
+.interactive {
+    border: 1px solid #6de0c3;
 
-    color: #079c73;
+    color: #0a9d77;
 
-    background: #f2fffb;
+    background: #effff9;
 
-    border-radius: 20px;
+    border-radius: 25px;
 
-    padding: 9px 16px;
+    padding: 10px 17px;
 
-    font-size: 11px;
+    font-size: 12px;
 
-    font-weight: bold;
+    font-weight: 700;
 }
 
-.status-online span {
+.online-dot {
     display: inline-block;
 
-    width: 8px;
-    height: 8px;
+    width: 10px;
+
+    height: 10px;
+
+    background: #12ae82;
 
     border-radius: 50%;
 
-    background: #10b981;
-
-    margin-right: 6px;
+    margin-right: 7px;
 }
 
 
@@ -104,20 +112,20 @@ body {
    MAIN
 ========================================================= */
 
-.main-container {
+.container {
+    width: calc(100% - 54px);
+
     max-width: 1500px;
 
-    margin: 20px auto;
-
-    padding: 0 24px;
+    margin: 22px auto;
 
     display: grid;
 
     grid-template-columns:
-        minmax(0, 3.3fr)
-        minmax(330px, 1fr);
+        minmax(0, 3fr)
+        minmax(360px, 1.15fr);
 
-    gap: 20px;
+    gap: 18px;
 }
 
 
@@ -127,14 +135,14 @@ body {
 
 .diagram-card,
 .detail-card {
-    background: white;
+    background: rgba(255,255,255,.94);
 
-    border: 1px solid #d4e2f0;
+    border: 1px solid #cbdff5;
 
-    border-radius: 9px;
+    border-radius: 11px;
 
     box-shadow:
-        0 3px 12px rgba(37, 77, 120, 0.07);
+        0 5px 22px rgba(49,98,145,.09);
 
     overflow: hidden;
 }
@@ -144,10 +152,10 @@ body {
    DIAGRAM HEADER
 ========================================================= */
 
-.diagram-header {
+.card-header {
     height: 58px;
 
-    padding: 0 18px;
+    border-bottom: 1px solid #d6e6f7;
 
     display: flex;
 
@@ -155,270 +163,631 @@ body {
 
     justify-content: space-between;
 
-    border-bottom: 1px solid #dce7f2;
+    padding: 0 17px;
 }
 
-.diagram-title {
+.title-left {
     display: flex;
 
     align-items: center;
 
     gap: 10px;
 
-    font-weight: bold;
+    font-size: 17px;
 
-    font-size: 15px;
+    font-weight: 700;
 
-    color: #173c6b;
+    color: #173e79;
 }
 
-.diagram-icon {
-    font-size: 25px;
+.title-icon {
+    color: #287cff;
 
+    font-size: 22px;
+}
+
+.interactive-small {
     color: #267cff;
-}
 
-.interactive-label {
-    border: 1px solid #afd2ff;
+    border: 1px solid #acd0ff;
 
-    background: #f3f8ff;
-
-    color: #2377ec;
-
-    border-radius: 18px;
+    background: #f1f7ff;
 
     padding: 7px 12px;
 
-    font-size: 9px;
+    border-radius: 20px;
 
-    font-weight: bold;
+    font-size: 10px;
+
+    font-weight: 700;
 }
 
 
 /* =========================================================
-   DIAGRAM AREA
+   DIAGRAM WRAPPER
 ========================================================= */
 
-.diagram-area {
-    width: 100%;
+.diagram-wrapper {
+    position: relative;
 
-    padding: 10px 12px 0;
+    min-height: 780px;
 
-    overflow-x: auto;
-}
+    padding: 20px 40px 35px;
 
-.diagram-area svg {
-    display: block;
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            #ffffff,
+            #f8fcff
+        );
 
-    width: 100%;
-
-    min-width: 800px;
-
-    height: auto;
+    overflow: hidden;
 }
 
 
 /* =========================================================
-   SVG COMPONENT
+   GENERAL COMPONENT
 ========================================================= */
 
 .component {
     cursor: pointer;
 
     transition:
-        opacity .15s ease,
-        filter .15s ease;
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
 }
 
 .component:hover {
-    filter:
-        drop-shadow(
-            0 0 5px
-            rgba(45, 117, 230, .35)
-        );
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(37,103,170,.18);
 }
 
 .component.selected {
-    filter:
-        drop-shadow(
-            0 0 8px
-            rgba(30, 110, 255, .7)
-        );
+    box-shadow:
+        0 0 0 3px rgba(42,125,255,.16),
+        0 7px 20px rgba(40,124,255,.18);
 }
 
 
 /* =========================================================
-   SOURCE
+   SOURCE BOX
 ========================================================= */
 
-.source-component rect {
-    fill: #fff9e6;
+.source-box {
+    position: absolute;
 
-    stroke: #f0a000;
+    top: 20px;
 
-    stroke-width: 2;
+    width: 290px;
+
+    min-height: 70px;
+
+    background: #fffaf0;
+
+    border: 2px solid #f3a600;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 11px 14px;
+
+    gap: 10px;
 }
 
-.source-component.selected rect {
-    fill: #fff0c4;
+.source-box:first-of-type {
+    left: 18%;
 }
 
-
-/* =========================================================
-   PANEL
-========================================================= */
-
-.panel-component rect {
-    fill: #edf5ff;
-
-    stroke: #2978ff;
-
-    stroke-width: 2;
+.source-box.genset {
+    right: 18%;
 }
 
-.panel-component.selected rect {
-    fill: #dcecff;
+.source-icon {
+    font-size: 29px;
+
+    width: 35px;
+
+    text-align: center;
+
+    color: #333;
 }
 
+.component-content {
+    display: flex;
 
-/* =========================================================
-   PROTECTION
-========================================================= */
+    flex-direction: column;
 
-.protection-component rect {
-    fill: #fff8f8;
+    gap: 2px;
 
-    stroke: #ff4040;
-
-    stroke-width: 2;
+    flex: 1;
 }
 
-.protection-component.selected rect {
-    fill: #ffeaea;
+.component-content strong {
+    font-size: 14px;
+
+    color: #1d3e70;
 }
 
+.component-content span {
+    font-size: 9px;
 
-/* =========================================================
-   FEEDER
-========================================================= */
-
-.feeder-component rect {
-    fill: #fff8f8;
-
-    stroke: #ff4040;
-
-    stroke-width: 2;
+    color: #6784a7;
 }
 
-.feeder-component.selected rect {
-    fill: #ffeaea;
+.component-content small {
+    font-size: 9px;
+
+    color: #244f87;
+
+    font-weight: 600;
 }
 
-
-/* =========================================================
-   OUTGOING
-========================================================= */
-
-.outgoing-component rect {
-    fill: #effff9;
-
-    stroke: #0cae8c;
-
-    stroke-width: 2;
-}
-
-.outgoing-component.selected rect {
-    fill: #dcfff5;
-}
-
-
-/* =========================================================
-   MDB
-========================================================= */
-
-.mdb-body {
-    fill: #f8fafc;
-
-    stroke: #91a9c3;
-
-    stroke-width: 2;
-}
-
-.mdb-header {
-    fill: #f2f7fc;
-
-    stroke: #b7cce1;
-
-    stroke-width: 1;
-}
-
-.voltage-label {
-    fill: #fff1f1;
-
-    stroke: #ff4141;
-
-    stroke-width: 1.5;
-}
-
-.voltage-text {
-    fill: #ed3737;
-
-    font-size: 10px;
-
-    font-weight: bold;
-
-    text-anchor: middle;
-}
-
-.status-green {
-    fill: #16bd78;
-}
-
-.mdb-title {
-    fill: #2873cb;
-
-    font-size: 11px;
-
-    font-weight: bold;
-}
-
-.active-text {
-    fill: #0ca47d;
+.status {
+    white-space: nowrap;
 
     font-size: 9px;
 
-    font-weight: bold;
+    font-weight: 700;
+}
+
+.status.active {
+    color: #0da97c;
+}
+
+.status.standby {
+    color: #eea200;
 }
 
 
 /* =========================================================
-   TEXT SVG
+   WIRES
 ========================================================= */
 
-.main-text {
-    text-anchor: middle;
+.wire {
+    position: absolute;
 
-    fill: #173861;
+    background: #56769d;
+}
+
+.wire-pln {
+    top: 90px;
+
+    left: 33%;
+
+    width: 2px;
+
+    height: 35px;
+}
+
+.wire-genset {
+    top: 90px;
+
+    right: 33%;
+
+    width: 2px;
+
+    height: 35px;
+}
+
+.arrow {
+    position: absolute;
+
+    color: #56769d;
+
+    font-size: 17px;
+}
+
+.arrow-pln {
+    top: 111px;
+
+    left: 33%;
+
+    transform: rotate(90deg);
+}
+
+.arrow-genset {
+    top: 111px;
+
+    right: 33%;
+
+    transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   PANEL INPUT
+========================================================= */
+
+.panel-box {
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 290px;
+
+    min-height: 62px;
+
+    background: #eef7ff;
+
+    border: 2px solid #2c7cff;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 9px 12px;
+
+    gap: 9px;
+}
+
+.panel-input {
+    top: 113px;
+}
+
+.ats {
+    top: 201px;
+}
+
+.panel-icon {
+    font-size: 25px;
+
+    color: #2178f1;
+
+    width: 30px;
+
+    text-align: center;
+}
+
+.vertical-wire {
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 3px;
+
+    background: #607d9f;
+}
+
+.wire-input {
+    top: 175px;
+
+    height: 25px;
+}
+
+.wire-ats {
+    top: 263px;
+
+    height: 27px;
+}
+
+.down-arrow {
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: #607d9f;
+
+    font-size: 15px;
+}
+
+.arrow-input {
+    top: 188px;
+}
+
+.arrow-ats {
+    top: 277px;
+}
+
+
+/* =========================================================
+   MDB PANEL
+========================================================= */
+
+.mdb-panel {
+    position: absolute;
+
+    left: 5%;
+
+    right: 5%;
+
+    top: 290px;
+
+    height: 455px;
+
+    border: 2px solid #91b5dd;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8fbfe,
+            #f5f9fd
+        );
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.8);
+}
+
+
+/* =========================================================
+   MDB HEADER
+========================================================= */
+
+.mdb-header {
+    position: absolute;
+
+    left: 12px;
+
+    right: 12px;
+
+    top: 10px;
+
+    height: 38px;
+
+    background: #f2f7fc;
+
+    border: 1px solid #caddeb;
+
+    border-radius: 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 9px;
+
+    gap: 18px;
+}
+
+.voltage {
+    border: 1px solid #ff8585;
+
+    background: white;
+
+    border-radius: 5px;
+
+    padding: 6px 12px;
+
+    color: #fa3e3e;
+
+    font-size: 10px;
+}
+
+.mdb-name {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #0876dd;
+
+    font-size: 11px;
+}
+
+.green-dot {
+    width: 8px;
+
+    height: 8px;
+
+    background: #12b07f;
+
+    border-radius: 50%;
+}
+
+.mdb-status {
+    margin-left: auto;
+
+    color: #0a9e76;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MCCB
+========================================================= */
+
+.mccb,
+.mcb {
+    position: absolute;
+
+    top: 67px;
+
+    height: 72px;
+
+    background: #fffafa;
+
+    border: 2px solid #ff4646;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 8px 12px;
+
+    gap: 10px;
+}
+
+.mccb {
+    left: 34%;
+
+    width: 31%;
+}
+
+.mcb {
+    right: 9%;
+
+    width: 22%;
+}
+
+.device-icon {
+    width: 30px;
+
+    text-align: center;
+
+    font-size: 23px;
+
+    color: #f33d3d;
+}
+
+.device-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+    flex: 1;
+}
+
+.device-info strong {
+    color: #244777;
 
     font-size: 12px;
-
-    font-weight: bold;
 }
 
-.sub-text {
-    text-anchor: middle;
+.device-info span {
+    color: #6683a7;
 
-    fill: #6a829f;
+    font-size: 9px;
+}
+
+.device-info small {
+    color: #365c8b;
 
     font-size: 8px;
+
+    font-weight: 600;
 }
 
-.switch-box {
-    fill: white;
+.device-info em {
+    color: #0ba77b;
 
-    stroke: #ff4040;
+    font-style: normal;
 
-    stroke-width: 2;
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   N BAR
+========================================================= */
+
+.neutral-bar {
+    position: absolute;
+
+    left: 3%;
+
+    top: 135px;
+
+    width: 44px;
+
+    height: 98px;
+
+    border-radius: 5px;
+
+    background: #1474df;
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-top: 12px;
+
+    gap: 3px;
+}
+
+.neutral-bar strong {
+    font-size: 16px;
+}
+
+.neutral-bar span {
+    font-size: 7px;
+}
+
+.neutral-bar i {
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    margin-top: 7px;
+}
+
+
+/* =========================================================
+   PE
+========================================================= */
+
+.pe-bar {
+    position: absolute;
+
+    right: 3%;
+
+    top: 135px;
+
+    width: 44px;
+
+    height: 98px;
+
+    border-radius: 5px;
+
+    background: #0ca971;
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-top: 12px;
+
+    gap: 3px;
+}
+
+.pe-bar strong {
+    font-size: 16px;
+}
+
+.pe-bar span {
+    font-size: 7px;
+}
+
+.ground-symbol {
+    font-size: 25px;
+
+    margin-top: 8px;
 }
 
 
@@ -426,98 +795,283 @@ body {
    BUSBAR
 ========================================================= */
 
-.busbar-component rect {
-    fill: #823cff;
+.busbars {
+    position: absolute;
 
-    stroke: #6b25e9;
+    left: 11%;
 
-    stroke-width: 1;
+    right: 11%;
+
+    top: 146px;
+
+    height: 90px;
 }
 
-.busbar-component circle {
-    fill: #ffd23c;
+.phase-row {
+    display: flex;
 
-    stroke: #7330d9;
+    align-items: center;
 
-    stroke-width: 1;
+    height: 17px;
+
+    gap: 10px;
 }
 
-.busbar-text {
-    fill: #6332bb;
+.phase-row span {
+    width: 18px;
 
-    font-size: 9px;
+    font-weight: 800;
 
-    font-weight: bold;
+    font-size: 12px;
+}
+
+.phase-row div {
+    height: 7px;
+
+    flex: 1;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 1px 3px rgba(0,0,0,.18);
+}
+
+.phase-r span {
+    color: #f13737;
+}
+
+.phase-r div {
+    background: linear-gradient(
+        90deg,
+        #ed3030,
+        #ff4d4d
+    );
+}
+
+.phase-s span {
+    color: #f19b00;
+}
+
+.phase-s div {
+    background: linear-gradient(
+        90deg,
+        #f7a600,
+        #ffc333
+    );
+}
+
+.phase-t span {
+    color: #287cff;
+}
+
+.phase-t div {
+    background: linear-gradient(
+        90deg,
+        #2679ed,
+        #4a9bff
+    );
+}
+
+.busbar-title {
+    text-align: center;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    color: #7047bb;
+
+    margin-top: 5px;
 }
 
 
 /* =========================================================
-   N / PE
+   FEEDER
 ========================================================= */
 
-.neutral {
-    fill: #1769df;
+.feeder-row {
+    position: absolute;
+
+    left: 8%;
+
+    right: 8%;
+
+    top: 235px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 13px;
 }
 
-.pe {
-    fill: #10a66e;
+.feeder-column {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
 }
 
-.bar-main {
-    fill: white;
+.feeder {
+    width: 100%;
 
-    text-anchor: middle;
+    min-height: 78px;
 
-    font-size: 16px;
+    border: 2px solid #ff4444;
 
-    font-weight: bold;
+    background: #fffafa;
+
+    border-radius: 8px;
+
+    padding: 9px;
+
+    display: flex;
+
+    gap: 7px;
 }
 
-.bar-sub {
-    fill: white;
+.feeder .device-icon {
+    font-size: 19px;
 
-    text-anchor: middle;
+    width: 20px;
+}
 
+.feeder .device-info strong {
+    font-size: 11px;
+}
+
+.feeder .device-info span,
+.feeder .device-info small,
+.feeder .device-info em {
     font-size: 7px;
 }
 
 
 /* =========================================================
-   PHASE WIRES
+   PHASE CONNECTION
 ========================================================= */
 
-.phase-r {
-    stroke: #f04444;
+.phase-connection {
+    height: 34px;
 
-    stroke-width: 2;
+    width: 65%;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    position: relative;
 }
 
-.phase-s {
-    stroke: #ffb000;
+.phase-connection::before {
+    content: "";
 
-    stroke-width: 2;
+    position: absolute;
+
+    top: 0;
+
+    left: 50%;
+
+    width: 1px;
+
+    height: 100%;
+
+    background: #7892af;
 }
 
-.phase-t {
-    stroke: #287cff;
+.phase-connection i {
+    width: 3px;
 
-    stroke-width: 2;
+    height: 34px;
+
+    display: block;
 }
 
-.main-line {
-    fill: none;
-
-    stroke: #647c99;
-
-    stroke-width: 3;
+.phase-connection i:nth-child(1) {
+    background: #ef3434;
 }
 
-.outgoing-line {
-    fill: none;
+.phase-connection i:nth-child(2) {
+    background: #ffae00;
+}
 
-    stroke: #647c99;
+.phase-connection i:nth-child(3) {
+    background: #287cff;
+}
 
-    stroke-width: 2.5;
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+.load {
+    width: 100%;
+
+    min-height: 77px;
+
+    border: 2px solid #08aa80;
+
+    background: #f3fffb;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 8px;
+}
+
+.load-icon {
+    width: 25px;
+
+    text-align: center;
+
+    font-size: 20px;
+
+    color: #09a67e;
+}
+
+.load strong {
+    display: block;
+
+    color: #24527e;
+
+    font-size: 11px;
+}
+
+.load span {
+    display: block;
+
+    color: #5e80a2;
+
+    font-size: 7px;
+}
+
+.load small {
+    display: block;
+
+    color: #37648f;
+
+    font-size: 7px;
+}
+
+.load em {
+    display: block;
+
+    color: #08a47a;
+
+    font-style: normal;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    margin-top: 3px;
 }
 
 
@@ -528,9 +1082,7 @@ body {
 .legend {
     min-height: 55px;
 
-    border-top: 1px solid #dce6f0;
-
-    padding: 11px 18px;
+    border-top: 1px solid #d5e5f5;
 
     display: flex;
 
@@ -540,13 +1092,15 @@ body {
 
     flex-wrap: wrap;
 
+    padding: 11px 18px;
+
     font-size: 10px;
 
-    color: #526d8e;
+    color: #5a789e;
 }
 
-.legend b {
-    color: #617994;
+.legend strong {
+    color: #37608f;
 }
 
 .legend span {
@@ -558,17 +1112,17 @@ body {
 }
 
 .legend i {
+    width: 14px;
+
+    height: 14px;
+
+    border-radius: 4px;
+
     display: inline-block;
-
-    width: 12px;
-
-    height: 12px;
-
-    border-radius: 3px;
 }
 
 .legend-source {
-    background: #f0a000;
+    background: #f3aa14;
 }
 
 .legend-panel {
@@ -576,28 +1130,30 @@ body {
 }
 
 .legend-protection {
-    background: #ff4040;
+    background: #ff4141;
 }
 
 .legend-busbar {
-    background: #823cff;
+    background: #813dff;
 }
 
 .legend-outgoing {
-    background: #0cae8c;
+    background: #0baa82;
 }
 
 
 /* =========================================================
-   DETAIL
+   DETAIL CARD
 ========================================================= */
 
 .detail-card {
-    min-height: 700px;
+    min-height: 900px;
 }
 
-.detail-title {
+.detail-header {
     height: 58px;
+
+    border-bottom: 1px solid #d7e6f5;
 
     display: flex;
 
@@ -607,112 +1163,117 @@ body {
 
     padding: 0 18px;
 
-    border-bottom: 1px solid #dce7f2;
+    font-size: 17px;
 
-    font-size: 16px;
-
-    font-weight: bold;
-
-    color: #173c6b;
+    color: #173e79;
 }
 
-.detail-title span {
-    font-size: 23px;
+.info-icon {
+    color: #277cff;
 
-    color: #287cff;
+    font-size: 27px;
 }
 
-.detail-body {
-    padding: 20px;
+.detail-content {
+    padding: 23px 20px;
 }
 
-.label {
-    color: #5c80ae;
-
-    font-size: 10px;
-
-    font-weight: bold;
-
-    margin-bottom: 9px;
-
-    letter-spacing: .3px;
-}
-
-.detail-body h2 {
-    color: #102f5b;
-
-    font-size: 20px;
-
-    line-height: 1.35;
-}
-
-.separator {
-    height: 1px;
-
-    background: #e1e9f1;
-
-    margin: 19px 0;
-}
-
-.type-badge {
-    display: inline-block;
-
-    background: #eef6ff;
-
-    border: 1px solid #9ec9ff;
-
-    color: #1972ed;
-
-    padding: 8px 12px;
-
-    border-radius: 6px;
+.detail-label {
+    color: #5680b5;
 
     font-size: 11px;
 
-    font-weight: bold;
+    font-weight: 700;
+
+    letter-spacing: .3px;
+
+    margin-bottom: 10px;
+}
+
+.detail-content h2 {
+    color: #173d78;
+
+    font-size: 27px;
+
+    margin-bottom: 3px;
+}
+
+.divider {
+    height: 1px;
+
+    background: #d9e7f5;
+
+    margin: 21px 0;
 }
 
 
 /* =========================================================
-   DETAIL INFORMATION
+   BADGE
 ========================================================= */
 
-.information {
+.detail-badge {
+    display: inline-block;
+
+    padding: 9px 15px;
+
+    border-radius: 20px;
+
+    border: 1px solid #ff9e9e;
+
+    background: #fff5f5;
+
+    color: #ed4545;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DETAIL INFO
+========================================================= */
+
+.detail-info {
     display: flex;
 
     flex-direction: column;
 
-    gap: 12px;
+    gap: 16px;
 }
 
-.info-row {
+.detail-row {
     display: grid;
 
-    grid-template-columns: 125px 15px 1fr;
+    grid-template-columns:
+        27px
+        105px
+        18px
+        1fr;
 
     align-items: center;
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
-.info-icon {
-    font-size: 15px;
+.detail-row-icon {
+    color: #557da9;
 
-    color: #5b86bc;
+    font-size: 16px;
 }
 
-.info-key {
-    color: #5b79a0;
+.detail-row-key {
+    color: #6684aa;
 }
 
-.info-colon {
-    color: #7891ae;
-
-    text-align: center;
+.detail-row-colon {
+    color: #7791ae;
 }
 
-.info-value {
-    color: #173e6b;
+.detail-row-value {
+    color: #183e78;
+
+    font-size: 13px;
 
     font-weight: 600;
 }
@@ -722,20 +1283,20 @@ body {
    DESCRIPTION
 ========================================================= */
 
-.description {
-    background: #f7fbff;
+.detail-description {
+    border: 1px solid #c9def5;
 
-    border: 1px solid #c7dcf2;
+    background: #f5faff;
 
-    border-radius: 6px;
+    border-radius: 8px;
 
-    padding: 13px;
+    padding: 14px;
 
-    color: #4e6c91;
+    color: #5578a4;
 
-    font-size: 11px;
+    font-size: 12px;
 
-    line-height: 1.65;
+    line-height: 1.7;
 }
 
 
@@ -743,32 +1304,32 @@ body {
    HELP
 ========================================================= */
 
-.help-box {
-    margin-top: 17px;
+.click-help {
+    margin-top: 21px;
 
-    border: 1px solid #cbdff3;
+    padding: 13px;
 
-    background: #f6fbff;
+    border: 1px solid #c9def5;
 
-    border-radius: 6px;
+    background: #f5faff;
 
-    padding: 12px;
+    border-radius: 7px;
 
     display: flex;
 
     gap: 10px;
 
-    color: #5d7ea5;
+    color: #5c83b3;
 
-    font-size: 10px;
+    font-size: 11px;
 
     line-height: 1.5;
 }
 
-.help-box span {
-    color: #287cff;
+.click-help span {
+    color: #277cff;
 
-    font-size: 15px;
+    font-size: 17px;
 }
 
 
@@ -777,17 +1338,17 @@ body {
 ========================================================= */
 
 footer {
-    background: white;
+    border-top: 1px solid #d5e4f3;
 
-    border-top: 1px solid #dbe6f1;
+    background: white;
 
     text-align: center;
 
     padding: 13px;
 
-    font-size: 10px;
+    color: #7891ae;
 
-    color: #7188a4;
+    font-size: 10px;
 }
 
 
@@ -795,9 +1356,9 @@ footer {
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 1050px) {
+@media (max-width: 1100px) {
 
-    .main-container {
+    .container {
         grid-template-columns: 1fr;
     }
 
@@ -808,44 +1369,34 @@ footer {
 }
 
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
 
-    .top-header {
+    .header {
+        padding: 14px;
+
         height: auto;
-
-        padding: 15px;
-
-        align-items: flex-start;
     }
 
-    .brand h1 {
-        font-size: 18px;
+    .header h1 {
+        font-size: 19px;
     }
 
-    .brand p {
+    .header p {
         font-size: 10px;
     }
 
-    .brand-icon {
-        font-size: 28px;
-    }
-
-    .status-online {
+    .interactive {
         display: none;
     }
 
-    .main-container {
-        margin: 10px auto;
-
-        padding: 0 8px;
+    .container {
+        width: 98%;
     }
 
-    .diagram-area {
+    .diagram-wrapper {
         overflow-x: auto;
-    }
 
-    .diagram-area svg {
-        min-width: 800px;
+        min-width: 1000px;
     }
 
 }
