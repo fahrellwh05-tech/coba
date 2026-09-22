@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapping Distribusi Listrik Kantor</title>
+  
+  <!-- Menghubungkan file CSS eksternal -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========================================================
+       BAGIAN HEADER: Judul Halaman
+       ======================================================== -->
+  <header class="header">
+    <div class="header-container">
+      <h1>Mapping Distribusi Listrik Kantor</h1>
+      <p class="subtitle">Visualisasi diagram sistem kelistrikan utama gedung perkantoran</p>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       BAGIAN KONTEN UTAMA: Diagram dan Panel Informasi
+       ======================================================== -->
+  <main class="main-container">
+    
+    <!-- KOLOM KIRI: Area Diagram SVG dan Legenda -->
+    <section class="diagram-section">
+      <div class="card diagram-card">
+        <div class="card-header">
+          <h2>Diagram Aliran Distribusi Listrik</h2>
+          <span class="badge">Interaktif</span>
+        </div>
+
+        <!-- Wadah pembungkus diagram SVG agar responsif -->
+        <div class="svg-container">
+          <svg 
+            id="electrical-diagram" 
+            viewBox="0 0 1000 950" 
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg">
+            
+            <!-- DEFINISI ELEMEN GRAFIS (Kepala Panah & Filter) -->
+            <defs>
+              <!-- Panah untuk penunjuk arah aliran listrik (Light Theme) -->
+              <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+              </marker>
+
+              <!-- Panah saat garis aktif/terpilih -->
+              <marker id="arrow-highlight" viewBox="0 0 10 10" refX="7" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+              </marker>
+            </defs>
+
+            <!-- ========================================================
+                 JALUR KABEL SISI HULU (PLN, GENSET MENUJU PANEL ATS/AMF)
+                 ======================================================== -->
+            <g class="power-lines" id="power-lines">
+              <!-- Garis 1: PLN -> Panel ATS/AMF (masuk dari atas kiri) -->
+              <path class="wire" d="M 320 90 L 320 170 L 400 170 L 400 210" marker-end="url(#arrow)" />
+              
+              <!-- Garis 2: Genset -> Panel ATS/AMF (masuk dari atas kanan) -->
+              <path class="wire" d="M 680 90 L 680 170 L 600 170 L 600 210" marker-end="url(#arrow)" />
+              
+              <!-- Garis 3: Output Panel ATS/AMF menuju RST Pembagian (busbar) -->
+              <path class="wire" d="M 500 295 L 500 345" marker-end="url(#arrow)" />
+
+              <!-- 5 Jalur Kabel Outgoing dari Bawah Kabinet Panel Menuju 5 Feeder -->
+              <!-- Outgoing Feeder 1 -->
+              <path class="wire" d="M 200 825 L 200 870" marker-end="url(#arrow)" />
+              <!-- Outgoing Feeder 2 -->
+              <path class="wire" d="M 350 825 L 350 870" marker-end="url(#arrow)" />
+              <!-- Outgoing Feeder 3 -->
+              <path class="wire" d="M 500 825 L 500 870" marker-end="url(#arrow)" />
+              <!-- Outgoing Feeder 4 -->
+              <path class="wire" d="M 650 825 L 650 870" marker-end="url(#arrow)" />
+              <!-- Outgoing Feeder 5 -->
+              <path class="wire" d="M 800 825 L 800 870" marker-end="url(#arrow)" />
+            </g>
+
+            <!-- ========================================================
+                 BLOK KOMPONEN SISTEM HULU (PLN, GENSET)
+                 ======================================================== -->
+            <g class="components-upstream" id="upstream-group">
+              <!-- 1. PLN (Sumber Utama) -->
+              <g class="node node-source" data-id="pln" tabindex="0" role="button" aria-label="Komponen PLN">
+                <rect x="240" y="40" width="160" height="50" rx="8" />
+                <text x="320" y="66" class="node-title">PLN</text>
+                <text x="320" y="80" class="node-tag">Sumber Utama (Utility)</text>
+              </g>
+
+              <!-- 2. GENSET (Sumber Cadangan) -->
+              <g class="node node-source" data-id="genset" tabindex="0" role="button" aria-label="Komponen Genset">
+                <rect x="600" y="40" width="160" height="50" rx="8" />
+                <text x="680" y="66" class="node-title">Genset</text>
+                <text x="680" y="80" class="node-tag">Sumber Cadangan (Backup)</text>
+              </g>
+
+              <!-- 3. Label MAINS INCOMING (di jalur PLN) -->
+              <text x="320" y="135" fill="#d97706" font-size="8" font-weight="700" text-anchor="middle">MAINS / PLN INCOMING</text>
+
+              <!-- 4. Label GENSET INCOMING (di jalur Genset) -->
+              <text x="680" y="135" fill="#d97706" font-size="8" font-weight="700" text-anchor="middle">GENSET INCOMING</text>
+
+              <!-- 5. PANEL ATS / AMF (Node Utama Panel Kontrol) -->
+              <g class="node node-panel" data-id="ats-amf" tabindex="0" role="button" aria-label="Panel ATS / AMF">
+                <rect x="360" y="210" width="280" height="85" rx="10" />
+                <text x="500" y="237" class="node-title">PANEL ATS / AMF</text>
+                <text x="500" y="253" class="node-tag">PLN + GENSET CONTROL</text>
+                <text x="500" y="270" fill="#2563eb" font-size="8.5" font-weight="600" text-anchor="middle">ComAp InteliLite AMF 25</text>
+                <text x="500" y="285" fill="#64748b" font-size="7.5" font-weight="500" text-anchor="middle">Mode: Automatic (A-0-M)</text>
+              </g>
+            </g>
+
+            <!-- ========================================================
+                 REPRESENTASI FISIK KABINET PANEL ATS/AMF (TAMPAK DEPAN)
+                 ======================================================== -->
+            <g class="ats-physical-panel" id="ats-panel-group">
+              
+              <!-- 1. Enclosure / Rangka Kabinet Panel Luar -->
+              <rect x="115" y="345" width="770" height="480" rx="10" class="ats-cabinet-outer" />
+              
+              <!-- Pelat Dudukan Dalam (Internal Mounting Plate) -->
+              <rect x="127" y="380" width="746" height="435" rx="6" class="ats-cabinet-inner" />
+
+              <!-- Engsel & Baut Kabinet Panel -->
+              <rect x="115" y="390" width="7" height="28" rx="2" class="ats-panel-hinge" />
+              <rect x="115" y="740" width="7" height="28" rx="2" class="ats-panel-hinge" />
+              <circle cx="135" cy="392" r="3" class="ats-bolt" />
+              <circle cx="865" cy="392" r="3" class="ats-bolt" />
+              <circle cx="135" cy="805" r="3" class="ats-bolt" />
+              <circle cx="865" cy="805" r="3" class="ats-bolt" />
+
+              <!-- Cable Glands Masuk di Sisi Atas Kabinet -->
+              <rect x="390" y="338" width="20" height="9" rx="2" class="cable-gland" />
+              <rect x="490" y="338" width="20" height="9" rx="2" class="cable-gland" />
+              <rect x="590" y="338" width="20" height="9" rx="2" class="cable-gland" />
+
+              <!-- Cable Glands Keluar di Sisi Bawah Kabinet (5 Feeder Outgoing) -->
+              <rect x="190" y="823" width="20" height="8" rx="2" class="cable-gland" />
+              <rect x="340" y="823" width="20" height="8" rx="2" class="cable-gland" />
+              <rect x="490" y="823" width="20" height="8" rx="2" class="cable-gland" />
+              <rect x="640" y="823" width="20" height="8" rx="2" class="cable-gland" />
+              <rect x="790" y="823" width="20" height="8" rx="2" class="cable-gland" />
+
+              <!-- Header / Pelat Nama Kabinet Panel ATS/AMF (Bisa Diklik) -->
+              <g class="node node-panel" data-id="ats-amf" tabindex="0" role="button" aria-label="Panel ATS / AMF">
+                <rect x="200" y="350" width="600" height="26" rx="5" class="ats-nameplate-bg comp-body" />
+                <circle cx="220" cy="363" r="4.5" class="ats-led-active" />
+                <text x="500" y="367" class="ats-nameplate-title" text-anchor="middle">PANEL ATS / AMF — PLN + GENSET CONTROL</text>
+                <text x="780" y="367" class="ats-nameplate-sub" text-anchor="middle">&#9679; AKTIF</text>
+              </g>
+
+              <!-- ====================================================
+                   BARIS 1: INDIKATOR PLN, COMAP CONTROLLER, INDIKATOR GENSET
+                   ==================================================== -->
+
+              <!-- Kabel Incoming dari Cable Gland menuju komponen -->
+              <line x1="400" y1="345" x2="400" y2="390" class="conductor-r" />
+              <line x1="500" y1="345" x2="500" y2="390" class="conductor-s" />
+              <line x1="600" y1="345" x2="600" y2="390" class="conductor-t" />
+
+              <!-- Indikator MAINS/PLN INCOMING (Kiri) -->
+              <g class="node" data-id="ats-indicator-pln" tabindex="0" role="button" aria-label="Indikator PLN">
+                <rect x="140" y="390" width="110" height="75" rx="5" class="ats-indicator-box comp-body" />
+                <text x="195" y="405" class="ats-indicator-title">MAINS / PLN</text>
+                <text x="195" y="415" class="ats-indicator-sub">INCOMING</text>
+                <!-- LED Status PLN -->
+                <circle cx="175" cy="435" r="6" class="ats-led-pln" />
+                <text x="175" y="450" class="ats-indicator-label">ON</text>
+                <circle cx="215" cy="435" r="6" class="ats-led-off" />
+                <text x="215" y="450" class="ats-indicator-label">OFF</text>
+              </g>
+
+              <!-- ComAp InteliLite AMF 25 (Controller Utama - TENGAH) -->
+              <g class="node" data-id="comap-controller" tabindex="0" role="button" aria-label="ComAp InteliLite AMF 25">
+                <rect x="350" y="390" width="300" height="95" rx="6" class="ats-controller-case comp-body" />
+                
+                <!-- LCD Screen -->
+                <rect x="375" y="400" width="160" height="55" rx="4" class="ats-controller-screen" />
+                <rect x="378" y="403" width="154" height="49" rx="3" class="ats-controller-screen-glow" />
+                
+                <!-- Teks pada layar -->
+                <text x="455" y="422" fill="#7dd3fc" font-size="8" font-weight="600" text-anchor="middle">ComAp InteliLite</text>
+                <text x="455" y="435" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">AMF 25</text>
+                <text x="455" y="447" fill="#67e8f9" font-size="7" font-weight="500" text-anchor="middle">AUTOMATIC MODE</text>
+
+                <!-- Tombol navigasi controller -->
+                <rect x="555" y="405" width="18" height="12" rx="2" class="ats-controller-btn" />
+                <rect x="555" y="422" width="18" height="12" rx="2" class="ats-controller-btn" />
+                <rect x="555" y="439" width="18" height="12" rx="2" class="ats-controller-btn" />
+                <rect x="580" y="405" width="18" height="12" rx="2" class="ats-controller-btn" />
+                <rect x="580" y="422" width="18" height="12" rx="2" class="ats-controller-btn" />
+                <rect x="580" y="439" width="18" height="12" rx="2" class="ats-controller-btn" />
+
+                <!-- LED status controller -->
+                <circle cx="615" cy="411" r="3" class="ats-controller-led" />
+                <circle cx="615" cy="428" r="3" fill="#ef4444" filter="drop-shadow(0 0 3px #ef4444)" />
+                <circle cx="615" cy="445" r="3" fill="#f59e0b" filter="drop-shadow(0 0 3px #f59e0b)" />
+                <circle cx="635" cy="411" r="3" class="ats-controller-led" />
+
+                <!-- Label controller -->
+                <text x="500" y="475" class="ats-controller-title">ComAp InteliLite AMF 25</text>
+                <text x="500" y="483" class="ats-controller-sub">AMF / GENSET CONTROLLER</text>
+              </g>
+
+              <!-- Indikator GENSET INCOMING (Kanan) -->
+              <g class="node" data-id="ats-indicator-genset" tabindex="0" role="button" aria-label="Indikator Genset">
+                <rect x="750" y="390" width="110" height="75" rx="5" class="ats-indicator-box comp-body" />
+                <text x="805" y="405" class="ats-indicator-title">GENSET</text>
+                <text x="805" y="415" class="ats-indicator-sub">INCOMING</text>
+                <!-- LED Status Genset -->
+                <circle cx="785" cy="435" r="6" class="ats-led-genset" />
+                <text x="785" y="450" class="ats-indicator-label">RUN</text>
+                <circle cx="825" cy="435" r="6" class="ats-led-off" />
+                <text x="825" y="450" class="ats-indicator-label">STOP</text>
+              </g>
+
+              <!-- ====================================================
+                   BARIS 2: SELECTOR SWITCH, MCB KONTROL, POWER SUPPLY
+                   ==================================================== -->
+
+              <!-- DIN Rail untuk komponen baris 2 -->
+              <rect x="140" y="502" width="720" height="5" rx="1" class="ats-din-rail" />
+              <line x1="150" y1="504.5" x2="850" y2="504.5" class="ats-din-rail-line" />
+
+              <!-- Selector Switch A-0-M -->
+              <g class="node" data-id="ats-selector" tabindex="0" role="button" aria-label="Selector Switch A-0-M">
+                <rect x="150" y="510" width="90" height="70" rx="4" class="ats-selector-body comp-body" />
+                <text x="195" y="523" class="ats-selector-title">SELECTOR</text>
+                <!-- Selector plate -->
+                <rect x="168" y="528" width="54" height="34" rx="3" class="ats-selector-plate" />
+                <!-- Knob -->
+                <circle cx="195" cy="545" r="10" class="ats-selector-knob" />
+                <!-- Pointer (menunjuk ke A = Automatic) -->
+                <line x1="195" y1="545" x2="185" y2="535" class="ats-selector-pointer" />
+                <!-- Labels A-0-M -->
+                <text x="177" y="533" class="ats-selector-label">A</text>
+                <text x="195" y="530" class="ats-selector-label">0</text>
+                <text x="213" y="533" class="ats-selector-label">M</text>
+                <text x="195" y="575" class="ats-selector-label">A-0-M</text>
+              </g>
+
+              <!-- MCB Kontrol 1 -->
+              <g class="node" data-id="mcb-kontrol" tabindex="0" role="button" aria-label="MCB Kontrol">
+                <rect x="260" y="510" width="42" height="70" rx="3" class="ats-mcb-case comp-body" />
+                <rect x="275" y="506" width="12" height="6" rx="1" class="ats-mcb-terminal" />
+                <text x="281" y="525" class="ats-mcb-title">MCB</text>
+                <text x="281" y="533" class="ats-mcb-sub">K1</text>
+                <rect x="275" y="540" width="12" height="14" rx="2" class="ats-mcb-toggle" />
+                <text x="281" y="565" fill="#15803d" font-size="6" font-weight="bold" text-anchor="middle">ON</text>
+                <rect x="275" y="576" width="12" height="6" rx="1" class="ats-mcb-terminal" />
+              </g>
+
+              <!-- MCB Kontrol 2 -->
+              <g class="node" data-id="mcb-kontrol" tabindex="0" role="button" aria-label="MCB Kontrol">
+                <rect x="310" y="510" width="42" height="70" rx="3" class="ats-mcb-case comp-body" />
+                <rect x="325" y="506" width="12" height="6" rx="1" class="ats-mcb-terminal" />
+                <text x="331" y="525" class="ats-mcb-title">MCB</text>
+                <text x="331" y="533" class="ats-mcb-sub">K2</text>
+                <rect x="325" y="540" width="12" height="14" rx="2" class="ats-mcb-toggle" />
+                <text x="331" y="565" fill="#15803d" font-size="6" font-weight="bold" text-anchor="middle">ON</text>
+                <rect x="325" y="576" width="12" height="6" rx="1" class="ats-mcb-terminal" />
+              </g>
+
+              <!-- MCB Kontrol 3 -->
+              <g class="node" data-id="mcb-kontrol" tabindex="0" role="button" aria-label="MCB Kontrol">
+                <rect x="360" y="510" width="42" height="70" rx="3" class="ats-mcb-case comp-body" />
+                <rect x="375" y="506" width="12" height="6" rx="1" class="ats-mcb-terminal" />
+                <text x="381" y="525" class="ats-mcb-title">MCB</text>
+                <text x="381" y="533" class="ats-mcb-sub">K3</text>
+                <rect x="375" y="540" width="12" height="14" rx="2" class="ats-mcb-toggle" />
+                <text x="381" y="565" fill="#15803d" font-size="6" font-weight="bold" text-anchor="middle">ON</text>
+                <rect x="375" y="576" width="12" height="6" rx="1" class="ats-mcb-terminal" />
+              </g>
+
+              <!-- Power Supply DC -->
+              <g class="node" data-id="ats-power-supply" tabindex="0" role="button" aria-label="Power Supply DC">
+                <rect x="430" y="510" width="90" height="70" rx="4" class="ats-power-supply-case comp-body" />
+                <rect x="445" y="522" width="60" height="38" rx="3" class="ats-power-supply-body" />
+                <text x="475" y="540" class="ats-power-supply-label">POWER</text>
+                <text x="475" y="550" class="ats-power-supply-label">SUPPLY</text>
+                <text x="475" y="570" class="ats-power-supply-sub">DC OUTPUT</text>
+                <!-- LED indicator -->
+                <circle cx="475" cy="516" r="2.5" class="ats-controller-led" />
+              </g>
+
+              <!-- ====================================================
+                   BARIS 2B: RELAY (4 buah tersusun rapi)
+                   ==================================================== -->
+
+              <!-- DIN Rail untuk relay -->
+              <rect x="550" y="510" width="310" height="5" rx="1" class="ats-din-rail" />
+
+              <!-- Relay 1 -->
+              <g class="node" data-id="ats-relay" tabindex="0" role="button" aria-label="Relay">
+                <rect x="560" y="518" width="52" height="60" rx="3" class="ats-relay-case comp-body" />
+                <rect x="567" y="525" width="38" height="30" rx="2" class="ats-relay-body" />
+                <text x="586" y="543" class="ats-relay-label">RLY</text>
+                <text x="586" y="553" class="ats-relay-label">1</text>
+                <!-- Terminal pins -->
+                <rect x="571" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <rect x="583" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <rect x="595" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <text x="586" y="575" fill="#15803d" font-size="5.5" font-weight="600" text-anchor="middle">ON</text>
+              </g>
+
+              <!-- Relay 2 -->
+              <g class="node" data-id="ats-relay" tabindex="0" role="button" aria-label="Relay">
+                <rect x="620" y="518" width="52" height="60" rx="3" class="ats-relay-case comp-body" />
+                <rect x="627" y="525" width="38" height="30" rx="2" class="ats-relay-body" />
+                <text x="646" y="543" class="ats-relay-label">RLY</text>
+                <text x="646" y="553" class="ats-relay-label">2</text>
+                <rect x="631" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <rect x="643" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <rect x="655" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <text x="646" y="575" fill="#15803d" font-size="5.5" font-weight="600" text-anchor="middle">ON</text>
+              </g>
+
+              <!-- Relay 3 -->
+              <g class="node" data-id="ats-relay" tabindex="0" role="button" aria-label="Relay">
+                <rect x="680" y="518" width="52" height="60" rx="3" class="ats-relay-case comp-body" />
+                <rect x="687" y="525" width="38" height="30" rx="2" class="ats-relay-body" />
+                <text x="706" y="543" class="ats-relay-label">RLY</text>
+                <text x="706" y="553" class="ats-relay-label">3</text>
+                <rect x="691" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <rect x="703" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <rect x="715" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <text x="706" y="575" fill="#15803d" font-size="5.5" font-weight="600" text-anchor="middle">ON</text>
+              </g>
+
+              <!-- Relay 4 -->
+              <g class="node" data-id="ats-relay" tabindex="0" role="button" aria-label="Relay">
+                <rect x="740" y="518" width="52" height="60" rx="3" class="ats-relay-case comp-body" />
+                <rect x="747" y="525" width="38" height="30" rx="2" class="ats-relay-body" />
+                <text x="766" y="543" class="ats-relay-label">RLY</text>
+                <text x="766" y="553" class="ats-relay-label">4</text>
+                <rect x="751" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <rect x="763" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <rect x="775" y="560" width="6" height="4" rx="0.5" class="ats-relay-pin" />
+                <text x="766" y="575" fill="#15803d" font-size="5.5" font-weight="600" text-anchor="middle">ON</text>
+              </g>
+
+              <!-- ====================================================
+                   Kabel kontrol internal (dari controller ke komponen)
+                   ==================================================== -->
+              <path d="M 500 485 L 500 505" class="ats-control-wire" />
+              <path d="M 400 465 L 195 465 L 195 510" class="ats-control-wire" />
+              <path d="M 600 465 L 805 465 L 805 465" class="ats-control-wire-amber" />
+              <path d="M 475 485 L 475 500 L 281 500 L 281 510" class="ats-control-wire-red" />
+              <path d="M 525 485 L 525 500 L 586 500 L 586 518" class="ats-control-wire" />
+
+              <!-- ====================================================
+                   BAGIAN TENGAH: BUSBAR RST PEMBAGIAN 3 FASA
+                   ==================================================== -->
+
+              <!-- Konduktor dari bawah area kontrol menuju Busbar -->
+              <line x1="400" y1="390" x2="400" y2="598" class="conductor-r" />
+              <line x1="500" y1="390" x2="500" y2="614" class="conductor-s" />
+              <line x1="600" y1="390" x2="600" y2="630" class="conductor-t" />
+
+              <!-- BUSBAR 3 FASA HORIZONTAL (R - S - T) -->
+              <g class="node node-distribution" data-id="rst-pembagian" tabindex="0" role="button" aria-label="RST Pembagian Busbar 3 Fasa">
+                
+                <!-- Area Deteksi Klik Busbar -->
+                <rect x="180" y="588" width="640" height="58" rx="4" fill="transparent" class="comp-body" />
+
+                <!-- Isolator Penyangga Busbar -->
+                <rect x="195" y="592" width="18" height="50" rx="3" class="busbar-support-bracket" />
+                <rect x="475" y="592" width="18" height="50" rx="3" class="busbar-support-bracket" />
+                <rect x="787" y="592" width="18" height="50" rx="3" class="busbar-support-bracket" />
+
+                <!-- BILAH 1: BUSBAR FASA R (Merah/Red) -->
+                <rect x="180" y="598" width="640" height="10" rx="2" class="busbar-bar-r" />
+                <rect x="182" y="599" width="22" height="8" rx="1" fill="#7f1d1d" />
+                <text x="193" y="606" class="busbar-label-r">R</text>
+                <rect x="796" y="599" width="22" height="8" rx="1" fill="#7f1d1d" />
+                <text x="807" y="606" class="busbar-label-r">R</text>
+
+                <!-- BILAH 2: BUSBAR FASA S (Kuning-Emas/Amber) -->
+                <rect x="180" y="614" width="640" height="10" rx="2" class="busbar-bar-s" />
+                <rect x="182" y="615" width="22" height="8" rx="1" fill="#78350f" />
+                <text x="193" y="622" class="busbar-label-s">S</text>
+                <rect x="796" y="615" width="22" height="8" rx="1" fill="#78350f" />
+                <text x="807" y="622" class="busbar-label-s">S</text>
+
+                <!-- BILAH 3: BUSBAR FASA T (Hitam/Dark Slate) -->
+                <rect x="180" y="630" width="640" height="10" rx="2" class="busbar-bar-t" />
+                <rect x="182" y="631" width="22" height="8" rx="1" fill="#0f172a" />
+                <text x="193" y="638" class="busbar-label-t">T</text>
+                <rect x="796" y="631" width="22" height="8" rx="1" fill="#0f172a" />
+                <text x="807" y="638" class="busbar-label-t">T</text>
+
+                <!-- Baut Sambungan Tap Konduktor pada Busbar Menuju 5 Breaker -->
+                <circle cx="190" cy="603" r="3" class="busbar-bolt" />
+                <circle cx="200" cy="619" r="3" class="busbar-bolt" />
+                <circle cx="210" cy="635" r="3" class="busbar-bolt" />
+
+                <circle cx="340" cy="603" r="3" class="busbar-bolt" />
+                <circle cx="350" cy="619" r="3" class="busbar-bolt" />
+                <circle cx="360" cy="635" r="3" class="busbar-bolt" />
+
+                <circle cx="490" cy="603" r="3" class="busbar-bolt" />
+                <circle cx="500" cy="619" r="3" class="busbar-bolt" />
+                <circle cx="510" cy="635" r="3" class="busbar-bolt" />
+
+                <circle cx="640" cy="603" r="3" class="busbar-bolt" />
+                <circle cx="650" cy="619" r="3" class="busbar-bolt" />
+                <circle cx="660" cy="635" r="3" class="busbar-bolt" />
+
+                <circle cx="790" cy="603" r="3" class="busbar-bolt" />
+                <circle cx="800" cy="619" r="3" class="busbar-bolt" />
+                <circle cx="810" cy="635" r="3" class="busbar-bolt" />
+
+                <!-- Label Teks Keterangan Busbar -->
+                <text x="500" y="655" fill="#64748b" font-size="9" font-weight="700" text-anchor="middle">RST PEMBAGIAN — REL DISTRIBUSI 3 FASA (R - S - T)</text>
+              </g>
+
+              <!-- ====================================================
+                   BAGIAN SAMPING: REL NETRAL (N) & GROUNDING (PE)
+                   ==================================================== -->
+              <!-- Rel Netral (N) Sisi Kiri Panel -->
+              <g class="neutral-assembly">
+                <rect x="135" y="585" width="30" height="120" rx="4" class="bar-neutral-rail" />
+                <text x="150" y="605" class="bar-tag-code">N</text>
+                <text x="150" y="620" class="bar-tag-name">Netral</text>
+                <!-- Terminal Baut Netral -->
+                <circle cx="150" cy="640" r="3" fill="#ffffff" />
+                <circle cx="150" cy="660" r="3" fill="#ffffff" />
+                <circle cx="150" cy="680" r="3" fill="#ffffff" />
+              </g>
+
+              <!-- Rel Grounding / Protective Earth (PE) Sisi Kanan Panel -->
+              <g class="ground-assembly">
+                <rect x="835" y="585" width="30" height="120" rx="4" class="bar-ground-rail" />
+                <text x="850" y="605" class="bar-tag-code">PE</text>
+                <text x="850" y="620" class="bar-tag-name">Ground</text>
+                <!-- Terminal Baut Grounding -->
+                <circle cx="850" cy="640" r="3" fill="#ffffff" />
+                <circle cx="850" cy="660" r="3" fill="#ffffff" />
+                <circle cx="850" cy="680" r="3" fill="#ffffff" />
+                <text x="850" y="698" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">&#9178;</text>
+              </g>
+
+              <!-- ====================================================
+                   BAGIAN BAWAH: 5 OUTGOING BREAKER (FEEDER)
+                   ==================================================== -->
+
+              <!-- Jalur Konduktor Tap dari Busbar Menuju 5 Breaker -->
+              <!-- Breaker 1 Taps -->
+              <line x1="190" y1="608" x2="190" y2="680" class="conductor-r" />
+              <line x1="200" y1="624" x2="200" y2="680" class="conductor-s" />
+              <line x1="210" y1="640" x2="210" y2="680" class="conductor-t" />
+
+              <!-- Breaker 2 Taps -->
+              <line x1="340" y1="608" x2="340" y2="680" class="conductor-r" />
+              <line x1="350" y1="624" x2="350" y2="680" class="conductor-s" />
+              <line x1="360" y1="640" x2="360" y2="680" class="conductor-t" />
+
+              <!-- Breaker 3 Taps -->
+              <line x1="490" y1="608" x2="490" y2="680" class="conductor-r" />
+              <line x1="500" y1="624" x2="500" y2="680" class="conductor-s" />
+              <line x1="510" y1="640" x2="510" y2="680" class="conductor-t" />
+
+              <!-- Breaker 4 Taps -->
+              <line x1="640" y1="608" x2="640" y2="680" class="conductor-r" />
+              <line x1="650" y1="624" x2="650" y2="680" class="conductor-s" />
+              <line x1="660" y1="640" x2="660" y2="680" class="conductor-t" />
+
+              <!-- Breaker 5 Taps -->
+              <line x1="790" y1="608" x2="790" y2="680" class="conductor-r" />
+              <line x1="800" y1="624" x2="800" y2="680" class="conductor-s" />
+              <line x1="810" y1="640" x2="810" y2="680" class="conductor-t" />
+
+              <!-- BREAKER 1 (Outgoing Feeder 1) -->
+              <g class="node node-protection" data-id="feeder-1" tabindex="0" role="button" aria-label="Breaker Feeder 1">
+                <rect x="160" y="680" width="80" height="74" rx="5" class="breaker-unit-case comp-body" />
+                <rect x="175" y="676" width="50" height="6" rx="1" class="mccb-terminal" />
+                <text x="200" y="700" class="breaker-unit-title">F1</text>
+                <text x="200" y="713" class="breaker-unit-sub">Breaker 1</text>
+                <rect x="192" y="720" width="16" height="14" rx="2" class="breaker-unit-toggle" />
+                <rect x="175" y="752" width="50" height="6" rx="1" class="mccb-terminal" />
+              </g>
+
+              <!-- BREAKER 2 (Outgoing Feeder 2) -->
+              <g class="node node-protection" data-id="feeder-2" tabindex="0" role="button" aria-label="Breaker Feeder 2">
+                <rect x="310" y="680" width="80" height="74" rx="5" class="breaker-unit-case comp-body" />
+                <rect x="325" y="676" width="50" height="6" rx="1" class="mccb-terminal" />
+                <text x="350" y="700" class="breaker-unit-title">F2</text>
+                <text x="350" y="713" class="breaker-unit-sub">Breaker 2</text>
+                <rect x="342" y="720" width="16" height="14" rx="2" class="breaker-unit-toggle" />
+                <rect x="325" y="752" width="50" height="6" rx="1" class="mccb-terminal" />
+              </g>
+
+              <!-- BREAKER 3 (Outgoing Feeder 3) -->
+              <g class="node node-protection" data-id="feeder-3" tabindex="0" role="button" aria-label="Breaker Feeder 3">
+                <rect x="460" y="680" width="80" height="74" rx="5" class="breaker-unit-case comp-body" />
+                <rect x="475" y="676" width="50" height="6" rx="1" class="mccb-terminal" />
+                <text x="500" y="700" class="breaker-unit-title">F3</text>
+                <text x="500" y="713" class="breaker-unit-sub">Breaker 3</text>
+                <rect x="492" y="720" width="16" height="14" rx="2" class="breaker-unit-toggle" />
+                <rect x="475" y="752" width="50" height="6" rx="1" class="mccb-terminal" />
+              </g>
+
+              <!-- BREAKER 4 (Outgoing Feeder 4) -->
+              <g class="node node-protection" data-id="feeder-4" tabindex="0" role="button" aria-label="Breaker Feeder 4">
+                <rect x="610" y="680" width="80" height="74" rx="5" class="breaker-unit-case comp-body" />
+                <rect x="625" y="676" width="50" height="6" rx="1" class="mccb-terminal" />
+                <text x="650" y="700" class="breaker-unit-title">F4</text>
+                <text x="650" y="713" class="breaker-unit-sub">Breaker 4</text>
+                <rect x="642" y="720" width="16" height="14" rx="2" class="breaker-unit-toggle" />
+                <rect x="625" y="752" width="50" height="6" rx="1" class="mccb-terminal" />
+              </g>
+
+              <!-- BREAKER 5 (Outgoing Feeder 5) -->
+              <g class="node node-protection" data-id="feeder-5" tabindex="0" role="button" aria-label="Breaker Feeder 5">
+                <rect x="760" y="680" width="80" height="74" rx="5" class="breaker-unit-case comp-body" />
+                <rect x="775" y="676" width="50" height="6" rx="1" class="mccb-terminal" />
+                <text x="800" y="700" class="breaker-unit-title">F5</text>
+                <text x="800" y="713" class="breaker-unit-sub">Breaker 5</text>
+                <rect x="792" y="720" width="16" height="14" rx="2" class="breaker-unit-toggle" />
+                <rect x="775" y="752" width="50" height="6" rx="1" class="mccb-terminal" />
+              </g>
+
+              <!-- Kabel Internal dari Bawah Breaker Menuju Cable Glands Kabinet -->
+              <line x1="200" y1="758" x2="200" y2="825" class="wire" />
+              <line x1="350" y1="758" x2="350" y2="825" class="wire" />
+              <line x1="500" y1="758" x2="500" y2="825" class="wire" />
+              <line x1="650" y1="758" x2="650" y2="825" class="wire" />
+              <line x1="800" y1="758" x2="800" y2="825" class="wire" />
+
+              <!-- ====================================================
+                   TERMINAL BLOCK (Bagian bawah panel, di atas cable glands)
+                   ==================================================== -->
+              <g class="node" data-id="ats-terminal" tabindex="0" role="button" aria-label="Terminal Block">
+                <!-- Rail terminal -->
+                <rect x="150" y="775" width="700" height="30" rx="3" class="ats-terminal-rail comp-body" />
+                <text x="500" y="786" class="ats-terminal-label">TERMINAL BLOCK</text>
+                <!-- Terminal blocks individual -->
+                <rect x="170" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="188" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="206" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="224" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="242" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="260" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="278" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="296" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="350" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="368" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="386" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="404" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="422" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="440" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="494" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="512" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="530" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="548" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="602" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="620" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="638" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="656" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="710" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="728" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="746" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <rect x="764" y="790" width="12" height="12" rx="1" class="ats-terminal-block" />
+                <!-- Terminal screws -->
+                <circle cx="176" cy="796" r="1.5" class="ats-terminal-screw" />
+                <circle cx="194" cy="796" r="1.5" class="ats-terminal-screw" />
+                <circle cx="212" cy="796" r="1.5" class="ats-terminal-screw" />
+                <circle cx="230" cy="796" r="1.5" class="ats-terminal-screw" />
+                <circle cx="248" cy="796" r="1.5" class="ats-terminal-screw" />
+                <circle cx="266" cy="796" r="1.5" class="ats-terminal-screw" />
+                <circle cx="284" cy="796" r="1.5" class="ats-terminal-screw" />
+                <circle cx="302" cy="796" r="1.5" class="ats-terminal-screw" />
+              </g>
+
+            </g>
+
+            <!-- ========================================================
+                 LIMA JALUR BEBAN OUTGOING FEEDER (DI BAWAH PANEL)
+                 ======================================================== -->
+            <g class="components-feeders" id="feeders-group">
+              
+              <!-- FEEDER 1 -->
+              <g class="node node-building" data-id="feeder-1" tabindex="0" role="button" aria-label="Komponen Feeder 1">
+                <rect x="135" y="870" width="130" height="52" rx="8" />
+                <text x="200" y="895" class="node-title">FEEDER 1</text>
+                <text x="200" y="911" class="node-tag">Outgoing Feeder</text>
+              </g>
+
+              <!-- FEEDER 2 -->
+              <g class="node node-building" data-id="feeder-2" tabindex="0" role="button" aria-label="Komponen Feeder 2">
+                <rect x="285" y="870" width="130" height="52" rx="8" />
+                <text x="350" y="895" class="node-title">FEEDER 2</text>
+                <text x="350" y="911" class="node-tag">Outgoing Feeder</text>
+              </g>
+
+              <!-- FEEDER 3 -->
+              <g class="node node-building" data-id="feeder-3" tabindex="0" role="button" aria-label="Komponen Feeder 3">
+                <rect x="435" y="870" width="130" height="52" rx="8" />
+                <text x="500" y="895" class="node-title">FEEDER 3</text>
+                <text x="500" y="911" class="node-tag">Outgoing Feeder</text>
+              </g>
+
+              <!-- FEEDER 4 -->
+              <g class="node node-building" data-id="feeder-4" tabindex="0" role="button" aria-label="Komponen Feeder 4">
+                <rect x="585" y="870" width="130" height="52" rx="8" />
+                <text x="650" y="895" class="node-title">FEEDER 4</text>
+                <text x="650" y="911" class="node-tag">Outgoing Feeder</text>
+              </g>
+
+              <!-- FEEDER 5 -->
+              <g class="node node-building" data-id="feeder-5" tabindex="0" role="button" aria-label="Komponen Feeder 5">
+                <rect x="735" y="870" width="130" height="52" rx="8" />
+                <text x="800" y="895" class="node-title">FEEDER 5</text>
+                <text x="800" y="911" class="node-tag">Outgoing Feeder</text>
+              </g>
+
+            </g>
+          </svg>
+        </div>
+
+        <!-- ========================================================
+             BAGIAN LEGENDA: Kategori Warna Komponen (Light Theme)
+             ======================================================== -->
+        <div class="legend-container">
+          <div class="legend-title">Kategori Legenda:</div>
+          <div class="legend-items">
+            <div class="legend-item">
+              <span class="legend-color color-source"></span>
+              <span class="legend-label">Sumber Listrik</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color color-panel"></span>
+              <span class="legend-label">Panel ATS / AMF</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color color-protection"></span>
+              <span class="legend-label">Proteksi & Kontrol</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color color-distribution"></span>
+              <span class="legend-label">RST Pembagian (R-S-T)</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color color-building"></span>
+              <span class="legend-label">Outgoing Feeder</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- KOLOM KANAN: Panel Informasi Detail Komponen -->
+    <aside class="info-section">
+      <div class="card info-card">
+        <div class="card-header">
+          <h2>Detail Komponen</h2>
+        </div>
+        
+        <div class="info-body" id="info-content">
+          <!-- Pesan awal sebelum komponen diklik -->
+          <div class="info-empty-state" id="empty-state">
+            <div class="empty-icon">&#9432;</div>
+            <p>Silakan klik salah satu kotak komponen pada diagram untuk melihat informasi lengkap.</p>
+          </div>
+
+          <!-- Wadah informasi detail (muncul saat komponen diklik) -->
+          <div class="info-details hidden" id="detail-box">
+            <div class="info-row">
+              <span class="info-label">Nama Komponen</span>
+              <span class="info-value" id="comp-name">-</span>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">Jenis Komponen</span>
+              <span class="info-badge" id="comp-type">-</span>
+            </div>
+
+            <!-- Kontainer atribut detail dinamis -->
+            <div class="info-extra-container" id="comp-extra-details"></div>
+
+            <div class="info-row info-desc-row" id="comp-desc-container">
+              <span class="info-label" id="comp-desc-label">Keterangan Singkat</span>
+              <p class="info-desc-text" id="comp-desc">-</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <p class="note-text">&#128279; Klik komponen lain pada diagram untuk mengganti informasi.</p>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ========================================================
+       FOOTER: Hak Cipta / Status Versi
+       ======================================================== -->
+  <footer class="footer">
+    <p>Mapping Distribusi Listrik Kantor &bull; Versi Tahap 1 (Visualisasi Dasar)</p>
+  </footer>
+
+  <!-- Menghubungkan file JavaScript eksternal -->
+  <script src="script.js"></script>
+</body>
+</html>

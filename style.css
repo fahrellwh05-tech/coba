@@ -1,0 +1,1048 @@
+/* ========================================================
+   STYLE.CSS - PETA DISTRIBUSI LISTRIK KANTOR
+   Tema: LIGHT THEME (Modern, Bersih, Profesional, dan Teknis)
+   Dilengkapi Styling Representasi Fisik Nyata Panel ATS/AMF
+   ======================================================== */
+
+/* --- 1. VARIABEL WARNA & UKURAN (LIGHT THEME) --- */
+:root {
+  /* Warna Latar Belakang & Panel Utama (Light Mode) */
+  --bg-main: #f8fafc;          /* Abu-abu sangat muda bersih (Slate 50) */
+  --bg-card: #ffffff;          /* Putih murni untuk kartu/panel */
+  --bg-card-header: #f8fafc;   /* Slate 50 untuk header kartu */
+  --border-color: #e2e8f0;     /* Border abu-abu tipis & rapi (Slate 200) */
+
+  /* Warna Teks Utama & Sekunder */
+  --text-main: #0f172a;        /* Teks gelap kontras tinggi (Slate 900) */
+  --text-muted: #64748b;       /* Teks abu-abu keterangan (Slate 500) */
+  
+  /* Kategori Warna Kelistrikan (Sesuai Standar & Legenda) */
+  --color-source: #d97706;       /* Amber/Kuning: Sumber Listrik (PLN, Genset) */
+  --color-panel: #2563eb;        /* Biru: Panel ATS/AMF */
+  --color-protection: #dc2626;   /* Merah: Proteksi (MCB, Breaker) */
+  --color-distribution: #7c3aed; /* Ungu: Rel Busbar Distribusi */
+  --color-building: #0d9488;     /* Teal: Outgoing Feeder Beban */
+
+  /* Kabel & Konduktor Listrik */
+  --wire-color: #64748b;         /* Abu-abu netral garis diagram */
+  --wire-highlight: #2563eb;     /* Biru aksen penanda kabel */
+}
+
+/* --- 2. RESET DASAR & PENGATURAN FONT --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- 3. HEADER HALAMAN --- */
+.header {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.2px;
+}
+
+.header .subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* --- 4. TATA LETAK UTAMA (RESPONSIVE GRID) --- */
+.main-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 340px; /* Diagram lebar di kiri, sidebar 340px di kanan */
+  gap: 1.5rem;
+  padding: 1.5rem;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* --- 5. KARTU & CONTAINER --- */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  background-color: var(--bg-card-header);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-header h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.badge {
+  background-color: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* --- 6. AREA DIAGRAM SVG --- */
+.svg-container {
+  padding: 1rem;
+  background-color: #ffffff;
+  background-image: 
+    linear-gradient(to right, rgba(226, 232, 240, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.45) 1px, transparent 1px);
+  background-size: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#electrical-diagram {
+  width: 100%;
+  height: auto;
+  max-height: 860px;
+  display: block;
+}
+
+/* Garis Kabel Listrik Eksternal */
+.wire {
+  stroke: var(--wire-color);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wire-bus {
+  stroke: var(--wire-color);
+  stroke-width: 3.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Styling Blok Komponen (Node SVG) */
+.node {
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.node rect {
+  stroke-width: 1.8;
+  transition: stroke-width 0.2s, stroke 0.2s, fill 0.2s;
+}
+
+.node-title {
+  fill: var(--text-main);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.node-tag {
+  fill: var(--text-muted);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 500;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* Kategori Blok Diagram (Light Theme) */
+.node-source rect {
+  fill: #fef3c7;
+  stroke: var(--color-source);
+}
+
+.node-panel rect {
+  fill: #eff6ff;
+  stroke: var(--color-panel);
+}
+
+.node-protection rect {
+  fill: #fef2f2;
+  stroke: var(--color-protection);
+}
+
+.node-distribution rect {
+  fill: #f5f3ff;
+  stroke: var(--color-distribution);
+}
+
+.node-building rect {
+  fill: #f0fdfa;
+  stroke: var(--color-building);
+}
+
+/* Efek Hover Node */
+.node:hover {
+  filter: drop-shadow(0 2px 8px rgba(37, 99, 235, 0.25));
+}
+
+.node:hover rect {
+  stroke-width: 2.4;
+}
+
+/* Efek Active (Saat Komponen Sedang Terpilih) */
+.node.active rect,
+.node.active .comp-body {
+  stroke: #2563eb !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.35));
+}
+
+.node.active text.node-title,
+.node.active text.ats-controller-title {
+  fill: #2563eb;
+}
+
+/* ========================================================
+   STYLING REPRESENTASI FISIK PANEL ATS/AMF (REALISTIS)
+   ======================================================== */
+
+/* 1. Kabinet Panel ATS/AMF (Enclosure) */
+.ats-cabinet-outer {
+  fill: #e2e8f0;
+  stroke: #94a3b8;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.07));
+}
+
+.ats-cabinet-inner {
+  fill: #f1f5f9;
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+}
+
+.ats-panel-hinge {
+  fill: #64748b;
+  stroke: #475569;
+  stroke-width: 1;
+}
+
+.ats-bolt {
+  fill: #cbd5e1;
+  stroke: #64748b;
+  stroke-width: 0.8;
+}
+
+/* Pelat Nama Header Panel ATS/AMF */
+.ats-nameplate-bg {
+  fill: #1e3a5f;
+  stroke: #0f172a;
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: fill 0.2s;
+}
+
+.node[data-id="ats-amf"]:hover .ats-nameplate-bg {
+  fill: #2d4a6f;
+}
+
+.ats-nameplate-title {
+  fill: #ffffff;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  pointer-events: none;
+}
+
+.ats-nameplate-sub {
+  fill: #94a3b8;
+  font-family: inherit;
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+.ats-led-active {
+  fill: #22c55e;
+  filter: drop-shadow(0 0 5px #22c55e);
+}
+
+/* Cable Glands di atas dan bawah kabinet */
+.cable-gland {
+  fill: #64748b;
+  stroke: #334155;
+  stroke-width: 1;
+}
+
+/* 2. ComAp InteliLite AMF 25 Controller */
+.ats-controller-case {
+  fill: #1e293b;
+  stroke: #0f172a;
+  stroke-width: 2;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.ats-controller-screen {
+  fill: #0c4a6e;
+  stroke: #164e63;
+  stroke-width: 1;
+}
+
+.ats-controller-screen-glow {
+  fill: #0ea5e9;
+  opacity: 0.08;
+}
+
+.ats-controller-title {
+  fill: #ffffff;
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.ats-controller-sub {
+  fill: #94a3b8;
+  font-family: inherit;
+  font-size: 7px;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.ats-controller-btn {
+  fill: #334155;
+  stroke: #475569;
+  stroke-width: 0.6;
+}
+
+.ats-controller-led {
+  fill: #22c55e;
+  filter: drop-shadow(0 0 3px #22c55e);
+}
+
+/* 3. Indikator PLN & Genset */
+.ats-indicator-box {
+  fill: #f8fafc;
+  stroke: #94a3b8;
+  stroke-width: 1.2;
+  cursor: pointer;
+}
+
+.ats-indicator-title {
+  fill: #0f172a;
+  font-family: inherit;
+  font-size: 7.5px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.ats-indicator-sub {
+  fill: #64748b;
+  font-family: inherit;
+  font-size: 6px;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.ats-led-pln {
+  fill: #22c55e;
+  filter: drop-shadow(0 0 4px #22c55e);
+}
+
+.ats-led-genset {
+  fill: #f59e0b;
+  filter: drop-shadow(0 0 4px #f59e0b);
+}
+
+.ats-led-off {
+  fill: #94a3b8;
+  filter: none;
+}
+
+.ats-indicator-label {
+  fill: #334155;
+  font-family: inherit;
+  font-size: 6.5px;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* 4. Selector Switch A-0-M */
+.ats-selector-body {
+  fill: #f8fafc;
+  stroke: #94a3b8;
+  stroke-width: 1.2;
+  cursor: pointer;
+}
+
+.ats-selector-plate {
+  fill: #e2e8f0;
+  stroke: #94a3b8;
+  stroke-width: 0.8;
+}
+
+.ats-selector-knob {
+  fill: #1e293b;
+  stroke: #0f172a;
+  stroke-width: 1;
+}
+
+.ats-selector-pointer {
+  stroke: #ef4444;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.ats-selector-label {
+  fill: #334155;
+  font-family: inherit;
+  font-size: 6.5px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.ats-selector-title {
+  fill: #0f172a;
+  font-family: inherit;
+  font-size: 7px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* 5. MCB Kontrol Internal Panel */
+.ats-mcb-case {
+  fill: #ffffff;
+  stroke: #64748b;
+  stroke-width: 1.5;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+}
+
+.ats-mcb-title {
+  fill: #0f172a;
+  font-family: inherit;
+  font-size: 7px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.ats-mcb-sub {
+  fill: #64748b;
+  font-family: inherit;
+  font-size: 6px;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.ats-mcb-toggle {
+  fill: #1e293b;
+  stroke: #0f172a;
+  stroke-width: 1;
+}
+
+.ats-mcb-terminal {
+  fill: #cbd5e1;
+  stroke: #64748b;
+  stroke-width: 0.8;
+}
+
+/* 6. DIN Rail (Penyangga Komponen) */
+.ats-din-rail {
+  fill: #e2e8f0;
+  stroke: #cbd5e1;
+  stroke-width: 1;
+}
+
+.ats-din-rail-line {
+  stroke: #94a3b8;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+/* 7. Relay */
+.ats-relay-case {
+  fill: #f0fdf4;
+  stroke: #86efac;
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.ats-relay-body {
+  fill: #16a34a;
+  stroke: #15803d;
+  stroke-width: 0.8;
+}
+
+.ats-relay-label {
+  fill: #ffffff;
+  font-family: inherit;
+  font-size: 6.5px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.ats-relay-pin {
+  fill: #94a3b8;
+  stroke: #64748b;
+  stroke-width: 0.5;
+}
+
+/* 8. Power Supply DC */
+.ats-power-supply-case {
+  fill: #fafafa;
+  stroke: #94a3b8;
+  stroke-width: 1.2;
+  cursor: pointer;
+}
+
+.ats-power-supply-body {
+  fill: #475569;
+  stroke: #334155;
+  stroke-width: 0.8;
+}
+
+.ats-power-supply-label {
+  fill: #ffffff;
+  font-family: inherit;
+  font-size: 6.5px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.ats-power-supply-sub {
+  fill: #94a3b8;
+  font-family: inherit;
+  font-size: 5.5px;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* 9. Terminal Block */
+.ats-terminal-rail {
+  fill: #e2e8f0;
+  stroke: #cbd5e1;
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.ats-terminal-block {
+  fill: #475569;
+  stroke: #334155;
+  stroke-width: 0.6;
+}
+
+.ats-terminal-screw {
+  fill: #94a3b8;
+  stroke: #64748b;
+  stroke-width: 0.5;
+}
+
+.ats-terminal-label {
+  fill: #334155;
+  font-family: inherit;
+  font-size: 7px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* 10. Kabel Kontrol / Control Wiring */
+.ats-control-wire {
+  stroke: #3b82f6;
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.ats-control-wire-red {
+  stroke: #ef4444;
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.ats-control-wire-amber {
+  stroke: #f59e0b;
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+  fill: none;
+  stroke-linecap: round;
+}
+
+/* ========================================================
+   STYLING KOMPONEN INTERNAL YANG DIPERTAHANKAN
+   ======================================================== */
+
+/* Busbar 3 Fasa Realistis (R - S - T) */
+.busbar-support-bracket {
+  fill: #991b1b;
+  stroke: #7f1d1d;
+  stroke-width: 1;
+}
+
+.busbar-bar-r {
+  fill: #dc2626;
+  stroke: #b91c1c;
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.busbar-bar-s {
+  fill: #d97706;
+  stroke: #b45309;
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.busbar-bar-t {
+  fill: #1e293b;
+  stroke: #0f172a;
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.busbar-label-r {
+  fill: #ffffff;
+  font-size: 7.5px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.busbar-label-s {
+  fill: #ffffff;
+  font-size: 7.5px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.busbar-label-t {
+  fill: #ffffff;
+  font-size: 7.5px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.busbar-bolt {
+  fill: #ca8a04;
+  stroke: #78350f;
+  stroke-width: 0.8;
+}
+
+/* Outgoing Feeder Breakers (5 Unit Horizontal) */
+.breaker-unit-case {
+  fill: #334155;
+  stroke: #1e293b;
+  stroke-width: 1.5;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+}
+
+.breaker-unit-title {
+  fill: #ffffff;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.breaker-unit-sub {
+  fill: #94a3b8;
+  font-family: inherit;
+  font-size: 7.5px;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.breaker-unit-toggle {
+  fill: #22c55e;
+  stroke: #15803d;
+  stroke-width: 1;
+}
+
+/* MCCB Terminal (dipakai oleh breaker feeder) */
+.mccb-terminal {
+  fill: #94a3b8;
+  stroke: #475569;
+  stroke-width: 1;
+}
+
+/* Rel Netral (N) & Grounding (PE) */
+.bar-neutral-rail {
+  fill: #2563eb;
+  stroke: #1d4ed8;
+  stroke-width: 1.2;
+}
+
+.bar-ground-rail {
+  fill: #16a34a;
+  stroke: #15803d;
+  stroke-width: 1.2;
+}
+
+.bar-tag-code {
+  fill: #ffffff;
+  font-family: inherit;
+  font-size: 9.5px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.bar-tag-name {
+  fill: #cbd5e1;
+  font-family: inherit;
+  font-size: 7.5px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+/* Jalur Konduktor Fasa Internal */
+.conductor-r {
+  stroke: #dc2626;
+  stroke-width: 2.2;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.conductor-s {
+  stroke: #d97706;
+  stroke-width: 2.2;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.conductor-t {
+  stroke: #1e293b;
+  stroke-width: 2.2;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.conductor-aux {
+  stroke: #3b82f6;
+  stroke-width: 1.5;
+  stroke-dasharray: 3 2;
+  fill: none;
+}
+
+/* --- 7. AREA LEGENDA (LIGHT THEME) --- */
+.legend-container {
+  padding: 0.9rem 1.25rem;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.legend-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.legend-label {
+  font-size: 0.82rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.color-source { background-color: var(--color-source); }
+.color-panel { background-color: var(--color-panel); }
+.color-protection { background-color: var(--color-protection); }
+.color-distribution { background-color: var(--color-distribution); }
+.color-building { background-color: var(--color-building); }
+
+/* --- 8. PANEL INFORMASI DETAIL (SIDEBAR LIGHT THEME) --- */
+.info-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-body {
+  padding: 1.25rem;
+  flex: 1;
+}
+
+/* Pesan Kosong / Default State */
+.info-empty-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
+  color: #2563eb;
+}
+
+.info-empty-state p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Wadah Data Detail */
+.info-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.info-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+/* Styling Atribut Tambahan Sidebar */
+.info-extra-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.info-spec-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.info-spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.info-spec-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+.info-spec-val {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.badge-status-active {
+  background-color: #ecfdf5;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge-system {
+  background-color: #faf5ff;
+  color: #7e22ce;
+  border: 1px solid #e9d5ff;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge-mode {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.comp-list-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.35rem;
+}
+
+.comp-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.comp-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #334155;
+  background: #f8fafc;
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.comp-list-bullet {
+  color: #2563eb;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.info-desc-text {
+  font-size: 0.9rem;
+  color: #334155;
+  background-color: #f8fafc;
+  padding: 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  line-height: 1.55;
+}
+
+.card-footer {
+  padding: 0.85rem 1.25rem;
+  background-color: #f8fafc;
+  border-top: 1px solid var(--border-color);
+}
+
+.note-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* --- 9. FOOTER HALAMAN --- */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+}
+
+/* --- 10. RESPONSIVE DESIGN (LAYAR KECIL / TABLET / HP) --- */
+@media (max-width: 950px) {
+  .main-container {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.3rem;
+  }
+
+  .legend-container {
+    justify-content: center;
+  }
+
+  .info-body {
+    padding: 1rem;
+  }
+}
