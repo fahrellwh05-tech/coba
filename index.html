@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,11 +15,11 @@
          HEADER
     ====================================================== -->
 
-    <header class="top-header">
+    <header class="header">
 
-        <div class="brand">
+        <div class="header-left">
 
-            <div class="brand-icon">
+            <div class="logo">
                 ⚡
             </div>
 
@@ -34,8 +33,9 @@
 
         </div>
 
-        <div class="status-online">
-            <span></span>
+
+        <div class="interactive">
+            <span class="online-dot"></span>
             INTERAKTIF
         </div>
 
@@ -46,20 +46,22 @@
          MAIN
     ====================================================== -->
 
-    <main class="main-container">
+    <main class="container">
 
 
         <!-- =================================================
-             DIAGRAM
+             DIAGRAM CARD
         ================================================== -->
 
         <section class="diagram-card">
 
-            <div class="diagram-header">
+            <div class="card-header">
 
-                <div class="diagram-title">
+                <div class="title-left">
 
-                    <span class="diagram-icon">▱</span>
+                    <span class="title-icon">
+                        ⚡
+                    </span>
 
                     <span>
                         Diagram Aliran Distribusi Listrik
@@ -67,1087 +69,759 @@
 
                 </div>
 
-                <div class="interactive-label">
+                <div class="interactive-small">
                     🔗 INTERAKTIF
                 </div>
 
             </div>
 
 
-            <!-- =================================================
-                 SVG
-            ================================================== -->
+            <div class="diagram-wrapper">
 
-            <div class="diagram-area">
+                <!-- =================================================
+                     PLN
+                ================================================== -->
 
-                <svg
-                    viewBox="0 0 1100 850"
-                    preserveAspectRatio="xMidYMid meet"
-                    id="electricalDiagram">
+                <div
+                    class="source-box component"
+                    data-component="pln">
 
+                    <div class="source-icon">
+                        ⚡
+                    </div>
 
-                    <!-- =================================================
-                         ARROW
-                    ================================================== -->
+                    <div class="component-content">
 
-                    <defs>
+                        <strong>PLN</strong>
 
-                        <marker
-                            id="arrowBlue"
-                            markerWidth="9"
-                            markerHeight="9"
-                            refX="7"
-                            refY="4.5"
-                            orient="auto">
-
-                            <path
-                                d="M0,0 L9,4.5 L0,9 Z"
-                                fill="#647b98">
-                            </path>
-
-                        </marker>
-
-                    </defs>
-
-
-                    <!-- =================================================
-                         PLN
-                    ================================================== -->
-
-                    <g
-                        class="component source-component"
-                        data-id="pln">
-
-                        <rect
-                            x="180"
-                            y="45"
-                            width="190"
-                            height="62"
-                            rx="8">
-                        </rect>
-
-                        <text
-                            x="275"
-                            y="72"
-                            class="main-text">
-
-                            ⚡ PLN
-
-                        </text>
-
-                        <text
-                            x="275"
-                            y="91"
-                            class="sub-text">
-
+                        <span>
                             Sumber Utama (Utility)
+                        </span>
 
-                        </text>
+                        <small>
+                            380/220 V
+                        </small>
 
-                    </g>
+                    </div>
+
+                    <div class="status active">
+                        ● Aktif
+                    </div>
+
+                </div>
 
 
-                    <!-- =================================================
-                         GENSET
-                    ================================================== -->
+                <!-- =================================================
+                     GENSET
+                ================================================== -->
 
-                    <g
-                        class="component source-component"
-                        data-id="genset">
+                <div
+                    class="source-box genset component"
+                    data-component="genset">
 
-                        <rect
-                            x="730"
-                            y="45"
-                            width="190"
-                            height="62"
-                            rx="8">
-                        </rect>
+                    <div class="source-icon">
+                        ⚙
+                    </div>
 
-                        <text
-                            x="825"
-                            y="72"
-                            class="main-text">
+                    <div class="component-content">
 
-                            ⚡ Genset
+                        <strong>Genset</strong>
 
-                        </text>
-
-                        <text
-                            x="825"
-                            y="91"
-                            class="sub-text">
-
+                        <span>
                             Sumber Cadangan (Backup)
+                        </span>
 
-                        </text>
+                        <small>
+                            380/220 V
+                        </small>
 
-                    </g>
+                    </div>
 
+                    <div class="status standby">
+                        ● Standby
+                    </div>
 
-                    <!-- =================================================
-                         PLN -> PANEL INPUT
-                    ================================================== -->
-
-                    <path
-                        d="M275 107 V145 H435 V175"
-                        class="main-line"
-                        marker-end="url(#arrowBlue)">
-                    </path>
+                </div>
 
 
-                    <!-- =================================================
-                         GENSET -> PANEL INPUT
-                    ================================================== -->
+                <!-- =================================================
+                     CONNECTOR PLN
+                ================================================== -->
 
-                    <path
-                        d="M825 107 V145 H665 V175"
-                        class="main-line"
-                        marker-end="url(#arrowBlue)">
-                    </path>
+                <div class="wire wire-pln"></div>
+
+                <div class="arrow arrow-pln">
+                    ▶
+                </div>
 
 
-                    <!-- =================================================
-                         PANEL INPUT ATS
-                    ================================================== -->
+                <!-- =================================================
+                     CONNECTOR GENSET
+                ================================================== -->
 
-                    <g
-                        class="component panel-component"
-                        data-id="panel-input">
+                <div class="wire wire-genset"></div>
 
-                        <rect
-                            x="410"
-                            y="175"
-                            width="280"
-                            height="65"
-                            rx="8">
-                        </rect>
+                <div class="arrow arrow-genset">
+                    ◀
+                </div>
 
-                        <text
-                            x="550"
-                            y="202"
-                            class="main-text">
 
-                            ⚙ Panel Input ATS
+                <!-- =================================================
+                     PANEL INPUT ATS
+                ================================================== -->
 
-                        </text>
+                <div
+                    class="panel-box panel-input component"
+                    data-component="panel">
 
-                        <text
-                            x="550"
-                            y="222"
-                            class="sub-text">
+                    <div class="panel-icon">
+                        ▣
+                    </div>
 
+                    <div class="component-content">
+
+                        <strong>
+                            Panel Input ATS
+                        </strong>
+
+                        <span>
                             Panel Masukan
+                        </span>
 
-                        </text>
+                        <small>
+                            380/220 V
+                        </small>
 
-                    </g>
+                    </div>
+
+                    <div class="status active">
+                        ● Aktif
+                    </div>
+
+                </div>
 
 
-                    <!-- PANEL INPUT -> ATS -->
+                <div class="vertical-wire wire-input"></div>
 
-                    <path
-                        d="M550 240 V275"
-                        class="main-line"
-                        marker-end="url(#arrowBlue)">
-                    </path>
+                <div class="down-arrow arrow-input">
+                    ▼
+                </div>
 
 
-                    <!-- =================================================
-                         ATS
-                    ================================================== -->
+                <!-- =================================================
+                     ATS
+                ================================================== -->
 
-                    <g
-                        class="component panel-component"
-                        data-id="ats">
+                <div
+                    class="panel-box ats component"
+                    data-component="ats">
 
-                        <rect
-                            x="410"
-                            y="275"
-                            width="280"
-                            height="65"
-                            rx="8">
-                        </rect>
+                    <div class="panel-icon">
+                        ⚙
+                    </div>
 
-                        <text
-                            x="550"
-                            y="302"
-                            class="main-text">
+                    <div class="component-content">
 
-                            ⚙ ATS
+                        <strong>
+                            ATS
+                        </strong>
 
-                        </text>
-
-                        <text
-                            x="550"
-                            y="322"
-                            class="sub-text">
-
+                        <span>
                             Automatic Transfer Switch
+                        </span>
 
-                        </text>
+                        <small>
+                            380/220 V
+                        </small>
 
-                    </g>
+                    </div>
+
+                    <div class="status active">
+                        ● Aktif
+                    </div>
+
+                </div>
 
 
-                    <!-- ATS -> MDB -->
+                <div class="vertical-wire wire-ats"></div>
 
-                    <path
-                        d="M550 340 V380"
-                        class="main-line"
-                        marker-end="url(#arrowBlue)">
-                    </path>
+                <div class="down-arrow arrow-ats">
+                    ▼
+                </div>
+
+
+                <!-- =================================================
+                     MDB
+                ================================================== -->
+
+                <div class="mdb-panel">
+
+
+                    <!-- MDB HEADER -->
+
+                    <div class="mdb-header">
+
+                        <div class="voltage">
+                            ⚡
+                            <strong>
+                                380/220 V
+                            </strong>
+                        </div>
+
+
+                        <div class="mdb-name">
+
+                            <span class="green-dot"></span>
+
+                            <strong>
+                                PANEL DISTRIBUSI UTAMA (MDB)
+                            </strong>
+
+                        </div>
+
+
+                        <div class="mdb-status">
+                            ● AKTIF
+                        </div>
+
+                    </div>
 
 
                     <!-- =================================================
-                         PANEL MDB
+                         MCCB
                     ================================================== -->
 
-                    <g class="mdb-panel">
+                    <div
+                        class="mccb component"
+                        data-component="mccb">
 
-                        <rect
-                            x="80"
-                            y="380"
-                            width="940"
-                            height="345"
-                            rx="10"
-                            class="mdb-body">
-                        </rect>
+                        <div class="device-icon">
+                            ▣
+                        </div>
 
+                        <div class="device-info">
 
-                        <!-- HEADER MDB -->
+                            <strong>
+                                MCCB UTAMA
+                            </strong>
 
-                        <rect
-                            x="100"
-                            y="395"
-                            width="900"
-                            height="45"
-                            rx="6"
-                            class="mdb-header">
-                        </rect>
+                            <span>
+                                Proteksi Utama (MCCB)
+                            </span>
 
+                            <small>
+                                380/220 V
+                            </small>
 
-                        <!-- Tegangan -->
+                        </div>
 
-                        <rect
-                            x="115"
-                            y="405"
-                            width="125"
-                            height="26"
-                            rx="5"
-                            class="voltage-label">
-                        </rect>
+                        <div class="status active">
+                            ● Aktif
+                        </div>
 
-                        <text
-                            x="177"
-                            y="423"
-                            class="voltage-text">
-
-                            ⚡ 380/220 V
-
-                        </text>
+                    </div>
 
 
-                        <!-- Nama MDB -->
+                    <!-- =================================================
+                         MCB
+                    ================================================== -->
 
-                        <circle
-                            cx="265"
-                            cy="418"
-                            r="5"
-                            class="status-green">
-                        </circle>
+                    <div
+                        class="mcb component"
+                        data-component="mcb">
 
-                        <text
-                            x="280"
-                            y="422"
-                            class="mdb-title">
+                        <div class="device-icon">
+                            ▤
+                        </div>
 
-                            PANEL DISTRIBUSI UTAMA (MDB)
+                        <div class="device-info">
 
-                        </text>
+                            <strong>
+                                MCB Ktrl
+                            </strong>
 
-
-                        <text
-                            x="980"
-                            y="422"
-                            text-anchor="end"
-                            class="active-text">
-
-                            ● AKTIF
-
-                        </text>
-
-
-                        <!-- =================================================
-                             MCCB UTAMA
-                        ================================================== -->
-
-                        <g
-                            class="component protection-component"
-                            data-id="mccb">
-
-                            <rect
-                                x="385"
-                                y="455"
-                                width="280"
-                                height="85"
-                                rx="8">
-                            </rect>
-
-                            <text
-                                x="525"
-                                y="486"
-                                class="main-text">
-
-                                ▣ MCCB UTAMA
-
-                            </text>
-
-                            <text
-                                x="525"
-                                y="507"
-                                class="sub-text">
-
-                                Proteksi Utama (MCCB / MCB)
-
-                            </text>
-
-                            <rect
-                                x="507"
-                                y="516"
-                                width="36"
-                                height="17"
-                                rx="3"
-                                class="switch-box">
-                            </rect>
-
-                        </g>
-
-
-                        <!-- =================================================
-                             MCB KONTROL
-                        ================================================== -->
-
-                        <g
-                            class="component protection-component"
-                            data-id="mcb">
-
-                            <rect
-                                x="750"
-                                y="460"
-                                width="110"
-                                height="80"
-                                rx="8">
-                            </rect>
-
-                            <text
-                                x="805"
-                                y="487"
-                                class="main-text">
-
-                                ▣ MCB Ktrl
-
-                            </text>
-
-                            <text
-                                x="805"
-                                y="505"
-                                class="sub-text">
-
+                            <span>
                                 Kontrol
+                            </span>
 
-                            </text>
+                            <small>
+                                220 V
+                            </small>
 
-                            <rect
-                                x="796"
-                                y="515"
-                                width="18"
-                                height="20"
-                                rx="3"
-                                class="switch-box">
-                            </rect>
+                        </div>
 
-                        </g>
+                        <div class="status active">
+                            ● Aktif
+                        </div>
 
-
-                        <!-- =================================================
-                             BUSBAR 3 FASA
-                        ================================================== -->
-
-                        <g
-                            class="component busbar-component"
-                            data-id="busbar">
-
-                            <!-- R -->
-
-                            <rect
-                                x="175"
-                                y="575"
-                                width="750"
-                                height="7"
-                                rx="3">
-                            </rect>
-
-                            <!-- S -->
-
-                            <rect
-                                x="175"
-                                y="590"
-                                width="750"
-                                height="7"
-                                rx="3">
-                            </rect>
-
-                            <!-- T -->
-
-                            <rect
-                                x="175"
-                                y="605"
-                                width="750"
-                                height="7"
-                                rx="3">
-                            </rect>
+                    </div>
 
 
-                            <!-- label -->
+                    <!-- =================================================
+                         N
+                    ================================================== -->
 
-                            <text
-                                x="550"
-                                y="625"
-                                text-anchor="middle"
-                                class="busbar-text">
+                    <div
+                        class="neutral-bar component"
+                        data-component="neutral">
 
-                                BUSBAR 3 FASA (R-S-T)
+                        <strong>N</strong>
 
-                            </text>
-
-
-                            <!-- Titik R -->
-
-                            <circle cx="240" cy="578" r="4"></circle>
-                            <circle cx="400" cy="578" r="4"></circle>
-                            <circle cx="550" cy="578" r="4"></circle>
-                            <circle cx="700" cy="578" r="4"></circle>
-                            <circle cx="860" cy="578" r="4"></circle>
-
-
-                            <!-- Titik S -->
-
-                            <circle cx="240" cy="593" r="4"></circle>
-                            <circle cx="400" cy="593" r="4"></circle>
-                            <circle cx="550" cy="593" r="4"></circle>
-                            <circle cx="700" cy="593" r="4"></circle>
-                            <circle cx="860" cy="593" r="4"></circle>
-
-
-                            <!-- Titik T -->
-
-                            <circle cx="240" cy="608" r="4"></circle>
-                            <circle cx="400" cy="608" r="4"></circle>
-                            <circle cx="550" cy="608" r="4"></circle>
-                            <circle cx="700" cy="608" r="4"></circle>
-                            <circle cx="860" cy="608" r="4"></circle>
-
-                        </g>
-
-
-                        <!-- =================================================
-                             N
-                        ================================================== -->
-
-                        <rect
-                            x="105"
-                            y="560"
-                            width="45"
-                            height="110"
-                            rx="5"
-                            class="neutral">
-                        </rect>
-
-                        <text
-                            x="127"
-                            y="590"
-                            class="bar-main">
-
-                            N
-
-                        </text>
-
-                        <text
-                            x="127"
-                            y="608"
-                            class="bar-sub">
-
+                        <span>
                             Neutral
+                        </span>
 
-                        </text>
+                        <i></i>
+                        <i></i>
+
+                    </div>
 
 
-                        <circle cx="127" cy="635" r="3" fill="white"></circle>
-                        <circle cx="127" cy="650" r="3" fill="white"></circle>
+                    <!-- =================================================
+                         BUSBAR
+                    ================================================== -->
+
+                    <div
+                        class="busbars component"
+                        data-component="busbar">
+
+                        <div class="phase-row phase-r">
+
+                            <span>R</span>
+
+                            <div></div>
+
+                        </div>
 
 
-                        <!-- =================================================
-                             PE
-                        ================================================== -->
+                        <div class="phase-row phase-s">
 
-                        <rect
-                            x="950"
-                            y="560"
-                            width="45"
-                            height="110"
-                            rx="5"
-                            class="pe">
-                        </rect>
+                            <span>S</span>
 
-                        <text
-                            x="972"
-                            y="590"
-                            class="bar-main">
+                            <div></div>
 
+                        </div>
+
+
+                        <div class="phase-row phase-t">
+
+                            <span>T</span>
+
+                            <div></div>
+
+                        </div>
+
+
+                        <div class="busbar-title">
+                            Busbar 3 Fasa (R-S-T)
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         PE
+                    ================================================== -->
+
+                    <div
+                        class="pe-bar component"
+                        data-component="pe">
+
+                        <strong>
                             PE
+                        </strong>
 
-                        </text>
-
-                        <text
-                            x="972"
-                            y="608"
-                            class="bar-sub">
-
+                        <span>
                             Ground
+                        </span>
 
-                        </text>
+                        <div class="ground-symbol">
+                            ⏚
+                        </div>
 
-                        <circle cx="972" cy="635" r="3" fill="white"></circle>
-                        <circle cx="972" cy="650" r="3" fill="white"></circle>
-
-
-                        <!-- =================================================
-                             FEEDER WIRES
-                        ================================================== -->
-
-                        <line
-                            x1="240"
-                            y1="612"
-                            x2="240"
-                            y2="645"
-                            class="phase-r">
-                        </line>
-
-                        <line
-                            x1="250"
-                            y1="612"
-                            x2="250"
-                            y2="645"
-                            class="phase-s">
-                        </line>
-
-                        <line
-                            x1="260"
-                            y1="612"
-                            x2="260"
-                            y2="645"
-                            class="phase-t">
-                        </line>
+                    </div>
 
 
-                        <line
-                            x1="400"
-                            y1="612"
-                            x2="400"
-                            y2="645"
-                            class="phase-r">
-                        </line>
+                    <!-- =================================================
+                         FEEDER ROW
+                    ================================================== -->
 
-                        <line
-                            x1="410"
-                            y1="612"
-                            x2="410"
-                            y2="645"
-                            class="phase-s">
-                        </line>
+                    <div class="feeder-row">
 
-                        <line
-                            x1="420"
-                            y1="612"
-                            x2="420"
-                            y2="645"
-                            class="phase-t">
-                        </line>
-
-
-                        <line
-                            x1="550"
-                            y1="612"
-                            x2="550"
-                            y2="645"
-                            class="phase-r">
-                        </line>
-
-                        <line
-                            x1="560"
-                            y1="612"
-                            x2="560"
-                            y2="645"
-                            class="phase-s">
-                        </line>
-
-                        <line
-                            x1="570"
-                            y1="612"
-                            x2="570"
-                            y2="645"
-                            class="phase-t">
-                        </line>
-
-
-                        <line
-                            x1="700"
-                            y1="612"
-                            x2="700"
-                            y2="645"
-                            class="phase-r">
-                        </line>
-
-                        <line
-                            x1="710"
-                            y1="612"
-                            x2="710"
-                            y2="645"
-                            class="phase-s">
-                        </line>
-
-                        <line
-                            x1="720"
-                            y1="612"
-                            x2="720"
-                            y2="645"
-                            class="phase-t">
-                        </line>
-
-
-                        <line
-                            x1="860"
-                            y1="612"
-                            x2="860"
-                            y2="645"
-                            class="phase-r">
-                        </line>
-
-                        <line
-                            x1="870"
-                            y1="612"
-                            x2="870"
-                            y2="645"
-                            class="phase-s">
-                        </line>
-
-                        <line
-                            x1="880"
-                            y1="612"
-                            x2="880"
-                            y2="645"
-                            class="phase-t">
-                        </line>
-
-
-                        <!-- =================================================
-                             FEEDERS
-                        ================================================== -->
 
                         <!-- FEEDER 1 -->
 
-                        <g
-                            class="component feeder-component"
-                            data-id="feeder1">
+                        <div
+                            class="feeder-column">
 
-                            <rect
-                                x="185"
-                                y="645"
-                                width="130"
-                                height="70"
-                                rx="7">
-                            </rect>
+                            <div
+                                class="feeder component"
+                                data-component="feeder1">
 
-                            <text
-                                x="250"
-                                y="673"
-                                class="main-text">
+                                <div class="device-icon">
+                                    ▤
+                                </div>
 
-                                ▣ Feeder 1
+                                <div class="device-info">
 
-                            </text>
+                                    <strong>
+                                        Feeder 1
+                                    </strong>
 
-                            <text
-                                x="250"
-                                y="693"
-                                class="sub-text">
+                                    <span>
+                                        MCCB/MCB
+                                    </span>
 
-                                (MCCB/MCB)
+                                    <small>
+                                        380/220 V
+                                    </small>
 
-                            </text>
+                                    <em>
+                                        ● Aktif
+                                    </em>
 
-                        </g>
+                                </div>
+
+                            </div>
+
+                            <div class="phase-connection">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
+
+                            <div
+                                class="load component"
+                                data-component="load1">
+
+                                <div class="load-icon">
+                                    ▣
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Beban 1
+                                    </strong>
+
+                                    <span>
+                                        Outgoing Feeder
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Terhubung
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+                        </div>
 
 
                         <!-- FEEDER 2 -->
 
-                        <g
-                            class="component feeder-component"
-                            data-id="feeder2">
+                        <div
+                            class="feeder-column">
 
-                            <rect
-                                x="345"
-                                y="645"
-                                width="130"
-                                height="70"
-                                rx="7">
-                            </rect>
+                            <div
+                                class="feeder component"
+                                data-component="feeder2">
 
-                            <text
-                                x="410"
-                                y="673"
-                                class="main-text">
+                                <div class="device-icon">
+                                    ▤
+                                </div>
 
-                                ▣ Feeder 2
+                                <div class="device-info">
 
-                            </text>
+                                    <strong>
+                                        Feeder 2
+                                    </strong>
 
-                            <text
-                                x="410"
-                                y="693"
-                                class="sub-text">
+                                    <span>
+                                        MCCB/MCB
+                                    </span>
 
-                                (MCCB/MCB)
+                                    <small>
+                                        380/220 V
+                                    </small>
 
-                            </text>
+                                    <em>
+                                        ● Aktif
+                                    </em>
 
-                        </g>
+                                </div>
+
+                            </div>
+
+                            <div class="phase-connection">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
+
+                            <div
+                                class="load component"
+                                data-component="load2">
+
+                                <div class="load-icon">
+                                    ▣
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Beban 2
+                                    </strong>
+
+                                    <span>
+                                        Outgoing Feeder
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Terhubung
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+                        </div>
 
 
                         <!-- FEEDER 3 -->
 
-                        <g
-                            class="component feeder-component"
-                            data-id="feeder3">
+                        <div
+                            class="feeder-column">
 
-                            <rect
-                                x="505"
-                                y="645"
-                                width="130"
-                                height="70"
-                                rx="7">
-                            </rect>
+                            <div
+                                class="feeder component"
+                                data-component="feeder3">
 
-                            <text
-                                x="570"
-                                y="673"
-                                class="main-text">
+                                <div class="device-icon">
+                                    ▤
+                                </div>
 
-                                ▣ Feeder 3
+                                <div class="device-info">
 
-                            </text>
+                                    <strong>
+                                        Feeder 3
+                                    </strong>
 
-                            <text
-                                x="570"
-                                y="693"
-                                class="sub-text">
+                                    <span>
+                                        MCCB/MCB
+                                    </span>
 
-                                (MCCB/MCB)
+                                    <small>
+                                        380/220 V
+                                    </small>
 
-                            </text>
+                                    <em>
+                                        ● Aktif
+                                    </em>
 
-                        </g>
+                                </div>
+
+                            </div>
+
+                            <div class="phase-connection">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
+
+                            <div
+                                class="load component"
+                                data-component="load3">
+
+                                <div class="load-icon">
+                                    ▣
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Beban 3
+                                    </strong>
+
+                                    <span>
+                                        Outgoing Feeder
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Terhubung
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+                        </div>
 
 
                         <!-- FEEDER 4 -->
 
-                        <g
-                            class="component feeder-component"
-                            data-id="feeder4">
+                        <div
+                            class="feeder-column">
 
-                            <rect
-                                x="665"
-                                y="645"
-                                width="130"
-                                height="70"
-                                rx="7">
-                            </rect>
+                            <div
+                                class="feeder component"
+                                data-component="feeder4">
 
-                            <text
-                                x="730"
-                                y="673"
-                                class="main-text">
+                                <div class="device-icon">
+                                    ▤
+                                </div>
 
-                                ▣ Feeder 4
+                                <div class="device-info">
 
-                            </text>
+                                    <strong>
+                                        Feeder 4
+                                    </strong>
 
-                            <text
-                                x="730"
-                                y="693"
-                                class="sub-text">
+                                    <span>
+                                        MCCB/MCB
+                                    </span>
 
-                                (MCCB/MCB)
+                                    <small>
+                                        380/220 V
+                                    </small>
 
-                            </text>
+                                    <em>
+                                        ● Aktif
+                                    </em>
 
-                        </g>
+                                </div>
+
+                            </div>
+
+                            <div class="phase-connection">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
+
+                            <div
+                                class="load component"
+                                data-component="load4">
+
+                                <div class="load-icon">
+                                    ▣
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Beban 4
+                                    </strong>
+
+                                    <span>
+                                        Outgoing Feeder
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Terhubung
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+                        </div>
 
 
                         <!-- FEEDER 5 -->
 
-                        <g
-                            class="component feeder-component"
-                            data-id="feeder5">
-
-                            <rect
-                                x="825"
-                                y="645"
-                                width="130"
-                                height="70"
-                                rx="7">
-                            </rect>
-
-                            <text
-                                x="890"
-                                y="673"
-                                class="main-text">
-
-                                ▣ Feeder 5
-
-                            </text>
-
-                            <text
-                                x="890"
-                                y="693"
-                                class="sub-text">
-
-                                (MCCB/MCB)
-
-                            </text>
-
-                        </g>
-
-                    </g>
-
-
-                    <!-- =================================================
-                         OUTGOING
-                    ================================================== -->
-
-                    <line
-                        x1="250"
-                        y1="715"
-                        x2="250"
-                        y2="755"
-                        class="outgoing-line"
-                        marker-end="url(#arrowBlue)">
-                    </line>
-
-                    <line
-                        x1="410"
-                        y1="715"
-                        x2="410"
-                        y2="755"
-                        class="outgoing-line"
-                        marker-end="url(#arrowBlue)">
-                    </line>
+                        <div
+                            class="feeder-column">
 
-                    <line
-                        x1="570"
-                        y1="715"
-                        x2="570"
-                        y2="755"
-                        class="outgoing-line"
-                        marker-end="url(#arrowBlue)">
-                    </line>
-
-                    <line
-                        x1="730"
-                        y1="715"
-                        x2="730"
-                        y2="755"
-                        class="outgoing-line"
-                        marker-end="url(#arrowBlue)">
-                    </line>
+                            <div
+                                class="feeder component"
+                                data-component="feeder5">
 
-                    <line
-                        x1="890"
-                        y1="715"
-                        x2="890"
-                        y2="755"
-                        class="outgoing-line"
-                        marker-end="url(#arrowBlue)">
-                    </line>
+                                <div class="device-icon">
+                                    ▤
+                                </div>
 
+                                <div class="device-info">
 
-                    <!-- BEBAN -->
+                                    <strong>
+                                        Feeder 5
+                                    </strong>
 
-                    <g
-                        class="component outgoing-component"
-                        data-id="beban1">
+                                    <span>
+                                        MCCB/MCB
+                                    </span>
 
-                        <rect
-                            x="185"
-                            y="755"
-                            width="130"
-                            height="58"
-                            rx="7">
-                        </rect>
+                                    <small>
+                                        380/220 V
+                                    </small>
 
-                        <text
-                            x="250"
-                            y="779"
-                            class="main-text">
+                                    <em>
+                                        ● Aktif
+                                    </em>
 
-                            Beban 1
+                                </div>
 
-                        </text>
+                            </div>
 
-                        <text
-                            x="250"
-                            y="798"
-                            class="sub-text">
+                            <div class="phase-connection">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
 
-                            Outgoing Feeder
+                            <div
+                                class="load component"
+                                data-component="load5">
 
-                        </text>
+                                <div class="load-icon">
+                                    ▣
+                                </div>
 
-                    </g>
+                                <div>
 
+                                    <strong>
+                                        Beban 5
+                                    </strong>
 
-                    <g
-                        class="component outgoing-component"
-                        data-id="beban2">
+                                    <span>
+                                        Outgoing Feeder
+                                    </span>
 
-                        <rect
-                            x="345"
-                            y="755"
-                            width="130"
-                            height="58"
-                            rx="7">
-                        </rect>
+                                    <small>
+                                        380/220 V
+                                    </small>
 
-                        <text
-                            x="410"
-                            y="779"
-                            class="main-text">
+                                    <em>
+                                        ● Terhubung
+                                    </em>
 
-                            Beban 2
+                                </div>
 
-                        </text>
+                            </div>
 
-                        <text
-                            x="410"
-                            y="798"
-                            class="sub-text">
+                        </div>
 
-                            Outgoing Feeder
+                    </div>
 
-                        </text>
+                </div>
 
-                    </g>
-
-
-                    <g
-                        class="component outgoing-component"
-                        data-id="beban3">
-
-                        <rect
-                            x="505"
-                            y="755"
-                            width="130"
-                            height="58"
-                            rx="7">
-                        </rect>
-
-                        <text
-                            x="570"
-                            y="779"
-                            class="main-text">
-
-                            Beban 3
-
-                        </text>
-
-                        <text
-                            x="570"
-                            y="798"
-                            class="sub-text">
-
-                            Outgoing Feeder
-
-                        </text>
-
-                    </g>
-
-
-                    <g
-                        class="component outgoing-component"
-                        data-id="beban4">
-
-                        <rect
-                            x="665"
-                            y="755"
-                            width="130"
-                            height="58"
-                            rx="7">
-                        </rect>
-
-                        <text
-                            x="730"
-                            y="779"
-                            class="main-text">
-
-                            Beban 4
-
-                        </text>
-
-                        <text
-                            x="730"
-                            y="798"
-                            class="sub-text">
-
-                            Outgoing Feeder
-
-                        </text>
-
-                    </g>
-
-
-                    <g
-                        class="component outgoing-component"
-                        data-id="beban5">
-
-                        <rect
-                            x="825"
-                            y="755"
-                            width="130"
-                            height="58"
-                            rx="7">
-                        </rect>
-
-                        <text
-                            x="890"
-                            y="779"
-                            class="main-text">
-
-                            Beban 5
-
-                        </text>
-
-                        <text
-                            x="890"
-                            y="798"
-                            class="sub-text">
-
-                            Outgoing Feeder
-
-                        </text>
-
-                    </g>
-
-                </svg>
 
             </div>
 
@@ -1158,7 +832,9 @@
 
             <div class="legend">
 
-                <b>Kategori Legenda:</b>
+                <strong>
+                    Kategori Legenda:
+                </strong>
 
                 <span>
                     <i class="legend-source"></i>
@@ -1191,85 +867,90 @@
 
 
         <!-- =================================================
-             DETAIL PANEL
+             DETAIL COMPONENT
         ================================================== -->
 
         <aside class="detail-card">
 
-            <div class="detail-title">
+            <div class="detail-header">
 
-                <span>ⓘ</span>
+                <span class="info-icon">
+                    ⓘ
+                </span>
 
-                Detail Komponen
+                <strong>
+                    Detail Komponen
+                </strong>
 
             </div>
 
 
-            <div class="detail-body">
+            <div class="detail-content">
 
-                <div class="label">
+                <div class="detail-label">
                     NAMA KOMPONEN
                 </div>
 
-                <h2 id="componentName">
-                    ATS (Automatic Transfer Switch)
+                <h2 id="detailName">
+                    MCCB UTAMA
                 </h2>
 
 
-                <div class="separator"></div>
+                <div class="divider"></div>
 
 
-                <div class="label">
+                <div class="detail-label">
                     JENIS KOMPONEN
                 </div>
 
                 <div
-                    class="type-badge"
-                    id="componentType">
+                    class="detail-badge"
+                    id="detailType">
 
-                    Automatic Transfer Switch
+                    Proteksi Utama (MCCB)
 
                 </div>
 
 
-                <div class="separator"></div>
+                <div class="divider"></div>
 
 
-                <div class="label">
+                <div class="detail-label">
                     INFORMASI DETAIL
                 </div>
 
 
                 <div
-                    class="information"
-                    id="componentInfo">
+                    class="detail-info"
+                    id="detailInfo">
 
                 </div>
 
 
-                <div class="separator"></div>
+                <div class="divider"></div>
 
 
-                <div class="label">
+                <div class="detail-label">
                     KETERANGAN SINGKAT
                 </div>
 
 
                 <div
-                    class="description"
-                    id="componentDescription">
+                    class="detail-description"
+                    id="detailDescription">
 
-                    ATS berfungsi untuk memindahkan sumber
-                    listrik secara otomatis antara PLN dan
-                    Genset saat terjadi gangguan pada salah
-                    satu sumber.
+                    MCCB utama digunakan sebagai pengaman
+                    dan pemutus utama sebelum daya listrik
+                    didistribusikan menuju seluruh feeder.
 
                 </div>
 
 
-                <div class="help-box">
+                <div class="click-help">
 
-                    <span>ⓘ</span>
+                    <span>
+                        ⓘ
+                    </span>
 
                     <p>
                         Klik komponen lain pada diagram
@@ -1292,7 +973,7 @@
     <footer>
 
         Mapping Distribusi Listrik Kantor
-        • Visualisasi Sistem Kelistrikan
+        • Versi Visualisasi Interaktif
 
     </footer>
 
@@ -1300,5 +981,4 @@
     <script src="./script.js"></script>
 
 </body>
-
 </html>
