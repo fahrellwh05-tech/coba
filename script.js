@@ -331,8 +331,17 @@ const componentData = {
 
 
 /* =========================================================
-   ELEMENT HTML
+   ELEMENT POPUP
 ========================================================= */
+
+const detailModal =
+    document.getElementById("detailModal");
+
+const detailBackdrop =
+    document.getElementById("detailBackdrop");
+
+const detailClose =
+    document.getElementById("detailClose");
 
 const detailName =
     document.getElementById("detailName");
@@ -353,26 +362,24 @@ const detailDescription =
 
 function showComponent(id) {
 
-    const data = componentData[id];
+    const data =
+        componentData[id];
 
-    if (!data) return;
+    if (!data) {
+        return;
+    }
 
-
-    /* Nama */
 
     detailName.textContent =
         data.name;
 
 
-    /* Jenis */
-
     detailType.textContent =
         data.type;
 
 
-    /* Informasi */
-
-    detailInfo.innerHTML = "";
+    detailInfo.innerHTML =
+        "";
 
 
     data.info.forEach(row => {
@@ -410,24 +417,24 @@ function showComponent(id) {
     });
 
 
-    /* Deskripsi */
-
     detailDescription.textContent =
         data.description;
 
 
-    /* Hilangkan selected */
+    /* Hapus highlight lama */
 
     document
         .querySelectorAll(".component")
         .forEach(el => {
 
-            el.classList.remove("selected");
+            el.classList.remove(
+                "selected"
+            );
 
         });
 
 
-    /* Tandai komponen yang dipilih */
+    /* Highlight komponen yang dipilih */
 
     document
         .querySelectorAll(
@@ -435,7 +442,58 @@ function showComponent(id) {
         )
         .forEach(el => {
 
-            el.classList.add("selected");
+            el.classList.add(
+                "selected"
+            );
+
+        });
+
+
+    /* Buka popup */
+
+    detailModal.classList.add(
+        "show"
+    );
+
+    detailModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+}
+
+
+/* =========================================================
+   TUTUP POPUP
+========================================================= */
+
+function closeDetail() {
+
+    detailModal.classList.remove(
+        "show"
+    );
+
+    detailModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    document
+        .querySelectorAll(".component")
+        .forEach(el => {
+
+            el.classList.remove(
+                "selected"
+            );
 
         });
 
@@ -452,10 +510,14 @@ document
 
         component.addEventListener(
             "click",
-            function () {
+            function(event) {
+
+                event.stopPropagation();
+
 
                 const id =
                     this.dataset.component;
+
 
                 showComponent(id);
 
@@ -466,7 +528,41 @@ document
 
 
 /* =========================================================
-   DEFAULT
+   TOMBOL X
 ========================================================= */
 
-showComponent("mccb");
+detailClose.addEventListener(
+    "click",
+    closeDetail
+);
+
+
+/* =========================================================
+   KLIK BACKGROUND
+========================================================= */
+
+detailBackdrop.addEventListener(
+    "click",
+    closeDetail
+);
+
+
+/* =========================================================
+   TOMBOL ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape" &&
+            detailModal.classList.contains("show")
+        ) {
+
+            closeDetail();
+
+        }
+
+    }
+);
