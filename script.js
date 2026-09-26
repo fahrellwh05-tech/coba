@@ -13,16 +13,16 @@ const componentData = {
             ["⚡", "Fungsi", "Sumber listrik utama"],
             ["⚡", "Tegangan", "380 / 220 V"],
             ["●", "Status", "Aktif"],
-            ["⌂", "Lokasi", "Sumber eksternal"]
+            ["⌂", "Sumber", "Jaringan PLN"]
         ],
 
         description:
-            "PLN merupakan sumber utama listrik yang memasok energi listrik ke sistem distribusi gedung."
+            "PLN merupakan sumber utama listrik yang memasok energi listrik menuju sistem distribusi gedung."
     },
 
 
     genset: {
-        name: "Genset",
+        name: "GENSET",
         type: "Sumber Cadangan (Backup)",
 
         info: [
@@ -34,12 +34,12 @@ const componentData = {
         ],
 
         description:
-            "Genset berfungsi sebagai sumber listrik cadangan ketika suplai PLN mengalami gangguan."
+            "Genset berfungsi sebagai sumber listrik cadangan ketika sumber utama PLN mengalami gangguan."
     },
 
 
     panel: {
-        name: "Panel Input ATS",
+        name: "PANEL INPUT ATS",
         type: "Panel Masukan",
 
         info: [
@@ -47,11 +47,11 @@ const componentData = {
             ["⚡", "Fungsi", "Menerima sumber PLN & Genset"],
             ["⚡", "Tegangan", "380 / 220 V"],
             ["●", "Status", "Aktif"],
-            ["⌂", "Lokasi", "Panel Input"]
+            ["⌂", "Tujuan", "ATS"]
         ],
 
         description:
-            "Panel Input ATS menjadi titik masuk dua sumber listrik sebelum diteruskan menuju ATS."
+            "Panel Input ATS merupakan titik masuk sumber listrik PLN dan Genset sebelum diteruskan menuju Automatic Transfer Switch."
     },
 
 
@@ -60,15 +60,15 @@ const componentData = {
         type: "Automatic Transfer Switch",
 
         info: [
-            ["▣", "Jenis", "Automatic Transfer Switch"],
+            ["⚙", "Jenis", "Automatic Transfer Switch"],
             ["⚡", "Fungsi", "Transfer sumber otomatis"],
             ["⚡", "Tegangan", "380 / 220 V"],
             ["●", "Status", "Aktif"],
-            ["⌂", "Lokasi", "Panel ATS"]
+            ["⌂", "Tujuan", "MDB"]
         ],
 
         description:
-            "ATS berfungsi memindahkan sumber listrik secara otomatis antara PLN dan Genset ketika terjadi gangguan pada salah satu sumber."
+            "ATS berfungsi melakukan perpindahan sumber listrik secara otomatis antara PLN dan Genset."
     },
 
 
@@ -77,15 +77,15 @@ const componentData = {
         type: "Proteksi Utama (MCCB)",
 
         info: [
-            ["▣", "Jenis", "MCCB"],
-            ["⚡", "Fungsi", "Proteksi utama"],
+            ["▣", "Proteksi", "MCCB"],
             ["⚡", "Tegangan", "380 / 220 V"],
+            ["→", "Fungsi", "Proteksi utama"],
             ["●", "Status", "Aktif"],
-            ["⌂", "Lokasi", "Panel Distribusi Utama"]
+            ["⌂", "Sumber", "ATS"]
         ],
 
         description:
-            "MCCB utama digunakan sebagai pengaman dan pemutus utama sebelum daya listrik didistribusikan menuju seluruh feeder."
+            "MCCB utama berfungsi sebagai pengaman dan pemutus utama sistem distribusi listrik pada MDB."
     },
 
 
@@ -94,20 +94,20 @@ const componentData = {
         type: "Proteksi Kontrol (MCB)",
 
         info: [
-            ["▤", "Jenis", "MCB"],
-            ["⚡", "Fungsi", "Proteksi rangkaian kontrol"],
+            ["▤", "Proteksi", "MCB"],
             ["⚡", "Tegangan", "220 V"],
+            ["→", "Fungsi", "Proteksi kontrol"],
             ["●", "Status", "Aktif"],
-            ["⌂", "Lokasi", "Panel Distribusi Utama"]
+            ["⌂", "Sumber", "MDB"]
         ],
 
         description:
-            "MCB kontrol digunakan untuk melindungi rangkaian kontrol dan peralatan pendukung pada panel distribusi."
+            "MCB kontrol digunakan untuk memberikan perlindungan pada rangkaian kontrol dan peralatan pendukung panel."
     },
 
 
     neutral: {
-        name: "N — Neutral Bar",
+        name: "N — NEUTRAL",
         type: "Neutral Bar",
 
         info: [
@@ -119,17 +119,17 @@ const componentData = {
         ],
 
         description:
-            "Neutral bar merupakan titik penghimpunan dan distribusi penghantar netral pada panel distribusi utama."
+            "Neutral Bar merupakan titik penghimpunan dan distribusi penghantar netral pada panel distribusi utama."
     },
 
 
     pe: {
-        name: "PE — Protective Earth",
-        type: "Grounding / Protective Earth",
+        name: "PE — GROUND",
+        type: "Protective Earth",
 
         info: [
             ["PE", "Jenis", "Protective Earth"],
-            ["⚡", "Fungsi", "Pengaman grounding"],
+            ["⚡", "Fungsi", "Proteksi grounding"],
             ["⚡", "Sistem", "Protective Earth"],
             ["●", "Status", "Terhubung"],
             ["⌂", "Lokasi", "MDB"]
@@ -154,7 +154,7 @@ const componentData = {
         ],
 
         description:
-            "Busbar 3 fasa merupakan penghantar utama yang membagi daya dari MCCB utama menuju masing-masing feeder."
+            "Busbar 3 fasa merupakan penghantar utama yang membagi daya listrik dari proteksi utama menuju feeder."
     },
 
 
@@ -331,7 +331,7 @@ const componentData = {
 
 
 /* =========================================================
-   ELEMENT POPUP
+   POPUP ELEMENT
 ========================================================= */
 
 const detailModal =
@@ -357,7 +357,7 @@ const detailDescription =
 
 
 /* =========================================================
-   TAMPILKAN DETAIL
+   SHOW DETAIL
 ========================================================= */
 
 function showComponent(id) {
@@ -366,39 +366,50 @@ function showComponent(id) {
         componentData[id];
 
     if (!data) {
+        console.warn(
+            "Data komponen tidak ditemukan:",
+            id
+        );
+
         return;
     }
 
+
+    /* Nama */
 
     detailName.textContent =
         data.name;
 
 
+    /* Jenis */
+
     detailType.textContent =
         data.type;
 
+
+    /* Informasi */
 
     detailInfo.innerHTML =
         "";
 
 
-    data.info.forEach(row => {
+    data.info.forEach(item => {
 
-        const div =
+        const row =
             document.createElement("div");
 
-        div.className =
+        row.className =
             "detail-row";
 
 
-        div.innerHTML = `
+        row.innerHTML = `
 
             <span class="detail-row-icon">
-                ${row[0]}
+                ${item[0]}
             </span>
 
             <span class="detail-row-key">
-                ${row[1]}
+                ${item[1]}
             </span>
 
             <span class="detail-row-colon">
@@ -406,47 +417,51 @@ function showComponent(id) {
             </span>
 
             <span class="detail-row-value">
-                ${row[2]}
+                ${item[2]}
             </span>
 
         `;
 
 
-        detailInfo.appendChild(div);
+        detailInfo.appendChild(row);
 
     });
 
+
+    /* Deskripsi */
 
     detailDescription.textContent =
         data.description;
 
 
-    /* Hapus highlight lama */
+    /* Hapus selected */
 
     document
         .querySelectorAll(".component")
-        .forEach(el => {
+        .forEach(component => {
 
-            el.classList.remove(
+            component.classList.remove(
                 "selected"
             );
 
         });
 
 
-    /* Highlight komponen yang dipilih */
+    /* Selected component */
 
-    document
-        .querySelectorAll(
+    const selected =
+        document.querySelectorAll(
             `[data-component="${id}"]`
-        )
-        .forEach(el => {
+        );
 
-            el.classList.add(
-                "selected"
-            );
 
-        });
+    selected.forEach(component => {
+
+        component.classList.add(
+            "selected"
+        );
+
+    });
 
 
     /* Buka popup */
@@ -460,15 +475,11 @@ function showComponent(id) {
         "false"
     );
 
-    document.body.classList.add(
-        "modal-open"
-    );
-
 }
 
 
 /* =========================================================
-   TUTUP POPUP
+   CLOSE DETAIL
 ========================================================= */
 
 function closeDetail() {
@@ -482,16 +493,12 @@ function closeDetail() {
         "true"
     );
 
-    document.body.classList.remove(
-        "modal-open"
-    );
-
 
     document
         .querySelectorAll(".component")
-        .forEach(el => {
+        .forEach(component => {
 
-            el.classList.remove(
+            component.classList.remove(
                 "selected"
             );
 
@@ -501,7 +508,7 @@ function closeDetail() {
 
 
 /* =========================================================
-   CLICK SEMUA KOMPONEN
+   KLIK KOMPONEN
 ========================================================= */
 
 document
@@ -514,10 +521,8 @@ document
 
                 event.stopPropagation();
 
-
                 const id =
                     this.dataset.component;
-
 
                 showComponent(id);
 
@@ -528,7 +533,7 @@ document
 
 
 /* =========================================================
-   TOMBOL X
+   CLOSE BUTTON
 ========================================================= */
 
 detailClose.addEventListener(
@@ -538,7 +543,7 @@ detailClose.addEventListener(
 
 
 /* =========================================================
-   KLIK BACKGROUND
+   BACKDROP
 ========================================================= */
 
 detailBackdrop.addEventListener(
@@ -548,7 +553,7 @@ detailBackdrop.addEventListener(
 
 
 /* =========================================================
-   TOMBOL ESC
+   ESC
 ========================================================= */
 
 document.addEventListener(
