@@ -1586,3 +1586,476 @@ footer {
 body.modal-open {
     overflow: hidden;
 }
+/* =========================================================
+   FINAL RAPihin LAYOUT DIAGRAM
+   Jangan ubah bentuk komponen
+========================================================= */
+
+
+/* =========================================================
+   AREA DIAGRAM
+========================================================= */
+
+.diagram-wrapper {
+    position: relative;
+
+    min-height: 780px;
+
+    padding: 25px 35px 70px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LEGEND
+   PINDAH KE BAWAH AGAR TIDAK MENABRAK PLN / GENSET
+========================================================= */
+
+.legend {
+    position: absolute !important;
+
+    left: 30px !important;
+    right: 30px !important;
+
+    bottom: 15px !important;
+
+    top: auto !important;
+
+    min-height: 43px;
+
+    padding: 8px 14px;
+
+    border: 1px solid #d5e5f5;
+
+    border-radius: 7px;
+
+    background: rgba(248, 252, 255, .96);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 22px;
+
+    z-index: 20;
+
+    box-shadow:
+        0 2px 8px rgba(50, 100, 150, .06);
+}
+
+
+/* =========================================================
+   SUMBER PLN
+========================================================= */
+
+.source-box[data-component="pln"] {
+
+    top: 18px !important;
+
+    left: 17% !important;
+
+    width: 245px;
+
+    min-height: 66px;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   GENSET
+========================================================= */
+
+.source-box[data-component="genset"] {
+
+    top: 18px !important;
+
+    right: 17% !important;
+
+    width: 245px;
+
+    min-height: 66px;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   PANEL INPUT ATS
+========================================================= */
+
+.panel-input {
+
+    top: 105px !important;
+
+    width: 255px;
+
+    min-height: 58px;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   KABEL PLN / GENSET
+========================================================= */
+
+.wire-pln {
+
+    top: 84px !important;
+
+    height: 22px !important;
+}
+
+.wire-genset {
+
+    top: 84px !important;
+
+    height: 22px !important;
+}
+
+.arrow-pln {
+
+    top: 96px !important;
+}
+
+.arrow-genset {
+
+    top: 96px !important;
+}
+
+
+/* =========================================================
+   KABEL PANEL INPUT
+========================================================= */
+
+.wire-input {
+
+    top: 163px !important;
+
+    height: 25px !important;
+}
+
+.arrow-input {
+
+    top: 175px !important;
+}
+
+
+/* =========================================================
+   ATS
+========================================================= */
+
+.ats {
+
+    top: 185px !important;
+
+    width: 255px;
+
+    min-height: 58px;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   KABEL ATS KE MDB
+========================================================= */
+
+.wire-ats {
+
+    top: 243px !important;
+
+    height: 28px !important;
+}
+
+.arrow-ats {
+
+    top: 257px !important;
+}
+
+
+/* =========================================================
+   MDB
+========================================================= */
+
+.mdb-panel {
+
+    top: 275px !important;
+
+    left: 4% !important;
+
+    right: 4% !important;
+
+    height: 445px !important;
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   HEADER MDB
+========================================================= */
+
+.mdb-header {
+
+    left: 12px;
+
+    right: 12px;
+
+    top: 9px;
+
+    height: 37px;
+}
+
+
+/* =========================================================
+   MCCB
+========================================================= */
+
+.mccb {
+
+    top: 62px !important;
+
+    left: 31% !important;
+
+    width: 31% !important;
+
+    height: 67px;
+}
+
+
+/* =========================================================
+   MCB
+========================================================= */
+
+.mcb {
+
+    top: 62px !important;
+
+    right: 8% !important;
+
+    width: 22% !important;
+
+    height: 67px;
+}
+
+
+/* =========================================================
+   N BAR
+========================================================= */
+
+.neutral-bar {
+
+    top: 128px !important;
+
+    height: 90px;
+}
+
+
+/* =========================================================
+   PE BAR
+========================================================= */
+
+.pe-bar {
+
+    top: 128px !important;
+
+    height: 90px;
+}
+
+
+/* =========================================================
+   BUSBAR
+========================================================= */
+
+.busbars {
+
+    top: 137px !important;
+
+    height: 82px;
+}
+
+
+/* =========================================================
+   FEEDER
+========================================================= */
+
+.feeder-row {
+
+    top: 220px !important;
+
+    left: 7% !important;
+
+    right: 7% !important;
+
+    gap: 11px;
+}
+
+
+/* =========================================================
+   FEEDER CARD
+========================================================= */
+
+.feeder {
+
+    min-height: 72px;
+
+    padding: 8px;
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+.load {
+
+    min-height: 72px;
+
+    padding: 8px;
+}
+
+
+/* =========================================================
+   JARAK ANTARA FEEDER DAN BEBAN
+========================================================= */
+
+.phase-connection {
+
+    height: 27px;
+}
+
+.phase-connection i {
+
+    height: 27px;
+}
+
+
+/* =========================================================
+   LEGEND TEXT
+========================================================= */
+
+.legend strong {
+
+    font-size: 9px;
+}
+
+.legend span {
+
+    font-size: 9px;
+
+    white-space: nowrap;
+}
+
+.legend i {
+
+    width: 11px;
+
+    height: 11px;
+}
+
+
+/* =========================================================
+   KURANGI RUANG KOSONG BAWAH
+========================================================= */
+
+.diagram-card {
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   CARD HEADER LEBIH RAPI
+========================================================= */
+
+.card-header {
+
+    height: 55px;
+
+    padding:
+        0 16px;
+}
+
+
+/* =========================================================
+   JIKA LAYAR BESAR
+========================================================= */
+
+@media (min-width: 1300px) {
+
+    .diagram-wrapper {
+
+        min-height: 760px;
+    }
+
+    .mdb-panel {
+
+        left: 5% !important;
+
+        right: 5% !important;
+    }
+
+    .source-box[data-component="pln"] {
+
+        left: 20% !important;
+    }
+
+    .source-box[data-component="genset"] {
+
+        right: 20% !important;
+    }
+
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .source-box[data-component="pln"] {
+
+        left: 12% !important;
+    }
+
+    .source-box[data-component="genset"] {
+
+        right: 12% !important;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .diagram-wrapper {
+
+        min-width: 1000px;
+
+        min-height: 760px;
+    }
+
+    .legend {
+
+        left: 20px !important;
+
+        right: 20px !important;
+
+        justify-content: flex-start;
+
+        overflow-x: auto;
+
+        white-space: nowrap;
+    }
+
+}
