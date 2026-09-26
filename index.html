@@ -1,297 +1,204 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Mapping Distribusi Listrik Kantor</title>
 
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="header">
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-    <div class="header-left">
+    <header class="top-header">
 
-        <div class="logo">
-            ⚡
-        </div>
+        <div class="brand">
 
-        <div>
-            <h1>Mapping Distribusi Listrik Kantor</h1>
-
-            <p>
-                Visualisasi diagram sistem kelistrikan utama gedung perkantoran
-            </p>
-        </div>
-
-    </div>
-
-    <div class="interactive">
-        <span class="online-dot"></span>
-        INTERAKTIF
-    </div>
-
-</header>
-
-
-<main class="container">
-
-    <section class="diagram-card">
-
-        <div class="card-header">
-
-            <div class="title-left">
-
-                <span class="title-icon">
-                    ⚡
-                </span>
-
-                <span>
-                    Diagram Aliran Distribusi Listrik
-                </span>
-
+            <div class="brand-icon">
+                ⚡
             </div>
 
-            <div class="interactive-small">
-                🔗 INTERAKTIF
+            <div class="brand-text">
+
+                <h1>
+                    Mapping Distribusi Listrik Kantor
+                </h1>
+
+                <p>
+                    Visualisasi diagram sistem kelistrikan utama gedung perkantoran
+                </p>
+
             </div>
 
         </div>
 
 
-        <div class="diagram-wrapper">
+        <div class="header-status">
+
+            <span class="status-dot"></span>
+
+            INTERAKTIF
+
+        </div>
+
+    </header>
 
 
-            <!-- =================================================
-                 PLN
-            ================================================== -->
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
-            <div
-                class="source-box component"
-                data-component="pln">
-
-                <div class="source-icon">
-                    ⚡
-                </div>
-
-                <div class="component-content">
-
-                    <strong>PLN</strong>
-
-                    <span>
-                        Sumber Utama (Utility)
-                    </span>
-
-                    <small>
-                        380/220 V
-                    </small>
-
-                </div>
-
-                <div class="status active">
-                    ● Aktif
-                </div>
-
-            </div>
+    <main class="main-container">
 
 
-            <!-- =================================================
-                 GENSET
-            ================================================== -->
+        <!-- =================================================
+             DIAGRAM CARD
+        ================================================== -->
 
-            <div
-                class="source-box genset component"
-                data-component="genset">
+        <section class="diagram-card">
 
-                <div class="source-icon">
-                    ⚙
-                </div>
 
-                <div class="component-content">
+            <!-- CARD HEADER -->
 
-                    <strong>Genset</strong>
+            <div class="diagram-header">
+
+                <div class="diagram-title">
 
                     <span>
-                        Sumber Cadangan (Backup)
-                    </span>
-
-                    <small>
-                        380/220 V
-                    </small>
-
-                </div>
-
-                <div class="status standby">
-                    ● Standby
-                </div>
-
-            </div>
-
-
-            <!-- =================================================
-                 CONNECTOR
-            ================================================== -->
-
-            <div class="wire wire-pln"></div>
-
-            <div class="arrow arrow-pln">
-                ▶
-            </div>
-
-            <div class="wire wire-genset"></div>
-
-            <div class="arrow arrow-genset">
-                ◀
-            </div>
-
-
-            <!-- =================================================
-                 PANEL INPUT ATS
-            ================================================== -->
-
-            <div
-                class="panel-box panel-input component"
-                data-component="panel">
-
-                <div class="panel-icon">
-                    ▣
-                </div>
-
-                <div class="component-content">
-
-                    <strong>
-                        Panel Input ATS
-                    </strong>
-
-                    <span>
-                        Panel Masukan
-                    </span>
-
-                    <small>
-                        380/220 V
-                    </small>
-
-                </div>
-
-                <div class="status active">
-                    ● Aktif
-                </div>
-
-            </div>
-
-
-            <div class="vertical-wire wire-input"></div>
-
-            <div class="down-arrow arrow-input">
-                ▼
-            </div>
-
-
-            <!-- =================================================
-                 ATS
-            ================================================== -->
-
-            <div
-                class="panel-box ats component"
-                data-component="ats">
-
-                <div class="panel-icon">
-                    ⚙
-                </div>
-
-                <div class="component-content">
-
-                    <strong>
-                        ATS
-                    </strong>
-
-                    <span>
-                        Automatic Transfer Switch
-                    </span>
-
-                    <small>
-                        380/220 V
-                    </small>
-
-                </div>
-
-                <div class="status active">
-                    ● Aktif
-                </div>
-
-            </div>
-
-
-            <div class="vertical-wire wire-ats"></div>
-
-            <div class="down-arrow arrow-ats">
-                ▼
-            </div>
-
-
-            <!-- =================================================
-                 MDB
-            ================================================== -->
-
-            <div class="mdb-panel">
-
-
-                <!-- MDB HEADER -->
-
-                <div class="mdb-header">
-
-                    <div class="voltage">
-
                         ⚡
+                    </span>
+
+                    <strong>
+                        Diagram Aliran Distribusi Listrik
+                    </strong>
+
+                </div>
+
+
+                <div class="interactive-badge">
+                    🔗 INTERAKTIF
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DIAGRAM AREA
+            ================================================== -->
+
+            <div class="diagram-area">
+
+
+                <!-- =================================================
+                     SUMBER LISTRIK
+                ================================================== -->
+
+                <div
+                    class="component source-component pln"
+                    data-component="pln">
+
+                    <div class="component-icon orange">
+                        ⚡
+                    </div>
+
+                    <div class="component-main">
 
                         <strong>
+                            PLN
+                        </strong>
+
+                        <span>
+                            Sumber Utama (Utility)
+                        </span>
+
+                        <small>
                             380/220 V
-                        </strong>
+                        </small>
 
                     </div>
 
+                    <span class="component-status active">
+                        ● Aktif
+                    </span>
 
-                    <div class="mdb-name">
+                </div>
 
-                        <span class="green-dot"></span>
+
+                <div
+                    class="component source-component genset"
+                    data-component="genset">
+
+                    <div class="component-icon dark">
+                        ⚙
+                    </div>
+
+                    <div class="component-main">
 
                         <strong>
-                            PANEL DISTRIBUSI UTAMA (MDB)
+                            Genset
                         </strong>
 
+                        <span>
+                            Sumber Cadangan (Backup)
+                        </span>
+
+                        <small>
+                            380/220 V
+                        </small>
+
                     </div>
 
-
-                    <div class="mdb-status">
-                        ● AKTIF
-                    </div>
+                    <span class="component-status standby">
+                        ● Standby
+                    </span>
 
                 </div>
 
 
                 <!-- =================================================
-                     MCCB
+                     KABEL SUMBER
+                ================================================== -->
+
+                <div class="source-line pln-line"></div>
+
+                <div class="source-arrow pln-arrow">
+                    ▼
+                </div>
+
+
+                <div class="source-line genset-line"></div>
+
+                <div class="source-arrow genset-arrow">
+                    ▼
+                </div>
+
+
+                <!-- =================================================
+                     PANEL INPUT ATS
                 ================================================== -->
 
                 <div
-                    class="mccb component"
-                    data-component="mccb">
+                    class="component panel-component panel-input"
+                    data-component="panel">
 
-                    <div class="device-icon">
+                    <div class="component-icon blue">
                         ▣
                     </div>
 
-                    <div class="device-info">
+                    <div class="component-main">
 
                         <strong>
-                            MCCB UTAMA
+                            Panel Input ATS
                         </strong>
 
                         <span>
-                            Proteksi Utama (MCCB)
+                            Panel Masukan
                         </span>
 
                         <small>
@@ -300,676 +207,777 @@
 
                     </div>
 
-                    <div class="status active">
+                    <span class="component-status active">
                         ● Aktif
-                    </div>
+                    </span>
 
                 </div>
 
 
+                <div class="vertical-line input-line"></div>
+
+
                 <!-- =================================================
-                     MCB
+                     ATS
                 ================================================== -->
 
                 <div
-                    class="mcb component"
-                    data-component="mcb">
+                    class="component panel-component ats"
+                    data-component="ats">
 
-                    <div class="device-icon">
-                        ▤
+                    <div class="component-icon blue">
+                        ⚙
                     </div>
 
-                    <div class="device-info">
+                    <div class="component-main">
 
                         <strong>
-                            MCB Ktrl
+                            ATS
                         </strong>
 
                         <span>
-                            Kontrol
+                            Automatic Transfer Switch
                         </span>
 
                         <small>
-                            220 V
+                            380/220 V
                         </small>
 
                     </div>
 
-                    <div class="status active">
+                    <span class="component-status active">
                         ● Aktif
-                    </div>
-
-                </div>
-
-
-                <!-- =================================================
-                     NEUTRAL
-                ================================================== -->
-
-                <div
-                    class="neutral-bar component"
-                    data-component="neutral">
-
-                    <strong>N</strong>
-
-                    <span>
-                        Neutral
                     </span>
 
-                    <i></i>
-                    <i></i>
+                </div>
+
+
+                <div class="vertical-line ats-line"></div>
+
+
+                <!-- =================================================
+                     MDB
+                ================================================== -->
+
+                <div class="mdb">
+
+
+                    <!-- MDB HEADER -->
+
+                    <div class="mdb-header">
+
+                        <div class="mdb-voltage">
+                            ⚡ 380/220 V
+                        </div>
+
+                        <div class="mdb-title">
+
+                            <span></span>
+
+                            PANEL DISTRIBUSI UTAMA (MDB)
+
+                        </div>
+
+                        <div class="mdb-active">
+                            ● AKTIF
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         MCCB
+                    ================================================== -->
+
+                    <div
+                        class="component protection-component mccb"
+                        data-component="mccb">
+
+                        <div class="protection-icon">
+                            ▣
+                        </div>
+
+                        <div class="component-main">
+
+                            <strong>
+                                MCCB UTAMA
+                            </strong>
+
+                            <span>
+                                Proteksi Utama (MCCB)
+                            </span>
+
+                            <small>
+                                380/220 V
+                            </small>
+
+                        </div>
+
+                        <span class="component-status active">
+                            ● Aktif
+                        </span>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         MCB
+                    ================================================== -->
+
+                    <div
+                        class="component protection-component mcb"
+                        data-component="mcb">
+
+                        <div class="protection-icon">
+                            ▤
+                        </div>
+
+                        <div class="component-main">
+
+                            <strong>
+                                MCB Ktrl
+                            </strong>
+
+                            <span>
+                                Kontrol
+                            </span>
+
+                            <small>
+                                220 V
+                            </small>
+
+                        </div>
+
+                        <span class="component-status active">
+                            ● Aktif
+                        </span>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         NEUTRAL
+                    ================================================== -->
+
+                    <div
+                        class="component neutral"
+                        data-component="neutral">
+
+                        <strong>
+                            N
+                        </strong>
+
+                        <span>
+                            Neutral
+                        </span>
+
+                        <i></i>
+                        <i></i>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         PE
+                    ================================================== -->
+
+                    <div
+                        class="component pe"
+                        data-component="pe">
+
+                        <strong>
+                            PE
+                        </strong>
+
+                        <span>
+                            Ground
+                        </span>
+
+                        <b>
+                            ⏚
+                        </b>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         BUSBAR
+                    ================================================== -->
+
+                    <div
+                        class="component busbar"
+                        data-component="busbar">
+
+                        <div class="phase phase-r">
+
+                            <b>R</b>
+
+                            <span></span>
+
+                        </div>
+
+
+                        <div class="phase phase-s">
+
+                            <b>S</b>
+
+                            <span></span>
+
+                        </div>
+
+
+                        <div class="phase phase-t">
+
+                            <b>T</b>
+
+                            <span></span>
+
+                        </div>
+
+
+                        <div class="busbar-label">
+                            Busbar 3 Fasa (R-S-T)
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         FEEDER AREA
+                    ================================================== -->
+
+                    <div class="feeders">
+
+
+                        <!-- FEEDER 1 -->
+
+                        <div class="feeder-column">
+
+                            <div
+                                class="component feeder"
+                                data-component="feeder1">
+
+                                <div class="feeder-icon">
+                                    ▤
+                                </div>
+
+                                <div class="component-main">
+
+                                    <strong>
+                                        Feeder 1
+                                    </strong>
+
+                                    <span>
+                                        MCCB/MCB
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Aktif
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="phase-wire">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
+
+
+                            <div
+                                class="component load"
+                                data-component="load1">
+
+                                <div class="load-icon">
+                                    ▣
+                                </div>
+
+                                <div class="component-main">
+
+                                    <strong>
+                                        Beban 1
+                                    </strong>
+
+                                    <span>
+                                        Outgoing Feeder
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Terhubung
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FEEDER 2 -->
+
+                        <div class="feeder-column">
+
+                            <div
+                                class="component feeder"
+                                data-component="feeder2">
+
+                                <div class="feeder-icon">
+                                    ▤
+                                </div>
+
+                                <div class="component-main">
+
+                                    <strong>
+                                        Feeder 2
+                                    </strong>
+
+                                    <span>
+                                        MCCB/MCB
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Aktif
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="phase-wire">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
+
+
+                            <div
+                                class="component load"
+                                data-component="load2">
+
+                                <div class="load-icon">
+                                    ▣
+                                </div>
+
+                                <div class="component-main">
+
+                                    <strong>
+                                        Beban 2
+                                    </strong>
+
+                                    <span>
+                                        Outgoing Feeder
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Terhubung
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FEEDER 3 -->
+
+                        <div class="feeder-column">
+
+                            <div
+                                class="component feeder"
+                                data-component="feeder3">
+
+                                <div class="feeder-icon">
+                                    ▤
+                                </div>
+
+                                <div class="component-main">
+
+                                    <strong>
+                                        Feeder 3
+                                    </strong>
+
+                                    <span>
+                                        MCCB/MCB
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Aktif
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="phase-wire">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
+
+
+                            <div
+                                class="component load"
+                                data-component="load3">
+
+                                <div class="load-icon">
+                                    ▣
+                                </div>
+
+                                <div class="component-main">
+
+                                    <strong>
+                                        Beban 3
+                                    </strong>
+
+                                    <span>
+                                        Outgoing Feeder
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Terhubung
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FEEDER 4 -->
+
+                        <div class="feeder-column">
+
+                            <div
+                                class="component feeder"
+                                data-component="feeder4">
+
+                                <div class="feeder-icon">
+                                    ▤
+                                </div>
+
+                                <div class="component-main">
+
+                                    <strong>
+                                        Feeder 4
+                                    </strong>
+
+                                    <span>
+                                        MCCB/MCB
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Aktif
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="phase-wire">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
+
+
+                            <div
+                                class="component load"
+                                data-component="load4">
+
+                                <div class="load-icon">
+                                    ▣
+                                </div>
+
+                                <div class="component-main">
+
+                                    <strong>
+                                        Beban 4
+                                    </strong>
+
+                                    <span>
+                                        Outgoing Feeder
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Terhubung
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FEEDER 5 -->
+
+                        <div class="feeder-column">
+
+                            <div
+                                class="component feeder"
+                                data-component="feeder5">
+
+                                <div class="feeder-icon">
+                                    ▤
+                                </div>
+
+                                <div class="component-main">
+
+                                    <strong>
+                                        Feeder 5
+                                    </strong>
+
+                                    <span>
+                                        MCCB/MCB
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Aktif
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="phase-wire">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
+
+
+                            <div
+                                class="component load"
+                                data-component="load5">
+
+                                <div class="load-icon">
+                                    ▣
+                                </div>
+
+                                <div class="component-main">
+
+                                    <strong>
+                                        Beban 5
+                                    </strong>
+
+                                    <span>
+                                        Outgoing Feeder
+                                    </span>
+
+                                    <small>
+                                        380/220 V
+                                    </small>
+
+                                    <em>
+                                        ● Terhubung
+                                    </em>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
 
                 <!-- =================================================
-                     BUSBAR
+                     LEGEND
+                     SEKARANG BENAR-BENAR DI BAWAH DIAGRAM
                 ================================================== -->
 
-                <div
-                    class="busbars component"
-                    data-component="busbar">
-
-                    <div class="phase-row phase-r">
-
-                        <span>R</span>
-
-                        <div></div>
-
-                    </div>
-
-
-                    <div class="phase-row phase-s">
-
-                        <span>S</span>
-
-                        <div></div>
-
-                    </div>
-
-
-                    <div class="phase-row phase-t">
-
-                        <span>T</span>
-
-                        <div></div>
-
-                    </div>
-
-
-                    <div class="busbar-title">
-                        Busbar 3 Fasa (R-S-T)
-                    </div>
-
-                </div>
-
-
-                <!-- =================================================
-                     PE
-                ================================================== -->
-
-                <div
-                    class="pe-bar component"
-                    data-component="pe">
+                <div class="legend">
 
                     <strong>
-                        PE
+                        Kategori Legenda:
                     </strong>
 
                     <span>
-                        Ground
+                        <i class="legend-source"></i>
+                        Sumber Listrik
                     </span>
 
-                    <div class="ground-symbol">
-                        ⏚
-                    </div>
+                    <span>
+                        <i class="legend-panel"></i>
+                        Panel Distribusi
+                    </span>
+
+                    <span>
+                        <i class="legend-protection"></i>
+                        Proteksi
+                    </span>
+
+                    <span>
+                        <i class="legend-busbar"></i>
+                        Busbar 3 Fasa
+                    </span>
+
+                    <span>
+                        <i class="legend-outgoing"></i>
+                        Outgoing Feeder
+                    </span>
 
                 </div>
 
-
-                <!-- =================================================
-                     FEEDER ROW
-                ================================================== -->
-
-                <div class="feeder-row">
-
-
-                    <!-- FEEDER 1 -->
-
-                    <div class="feeder-column">
-
-                        <div
-                            class="feeder component"
-                            data-component="feeder1">
-
-                            <div class="device-icon">
-                                ▤
-                            </div>
-
-                            <div class="device-info">
-
-                                <strong>
-                                    Feeder 1
-                                </strong>
-
-                                <span>
-                                    MCCB/MCB
-                                </span>
-
-                                <small>
-                                    380/220 V
-                                </small>
-
-                                <em>
-                                    ● Aktif
-                                </em>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="phase-connection">
-                            <i></i>
-                            <i></i>
-                            <i></i>
-                        </div>
-
-
-                        <div
-                            class="load component"
-                            data-component="load1">
-
-                            <div class="load-icon">
-                                ▣
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Beban 1
-                                </strong>
-
-                                <span>
-                                    Outgoing Feeder
-                                </span>
-
-                                <small>
-                                    380/220 V
-                                </small>
-
-                                <em>
-                                    ● Terhubung
-                                </em>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- FEEDER 2 -->
-
-                    <div class="feeder-column">
-
-                        <div
-                            class="feeder component"
-                            data-component="feeder2">
-
-                            <div class="device-icon">
-                                ▤
-                            </div>
-
-                            <div class="device-info">
-
-                                <strong>
-                                    Feeder 2
-                                </strong>
-
-                                <span>
-                                    MCCB/MCB
-                                </span>
-
-                                <small>
-                                    380/220 V
-                                </small>
-
-                                <em>
-                                    ● Aktif
-                                </em>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="phase-connection">
-                            <i></i>
-                            <i></i>
-                            <i></i>
-                        </div>
-
-
-                        <div
-                            class="load component"
-                            data-component="load2">
-
-                            <div class="load-icon">
-                                ▣
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Beban 2
-                                </strong>
-
-                                <span>
-                                    Outgoing Feeder
-                                </span>
-
-                                <small>
-                                    380/220 V
-                                </small>
-
-                                <em>
-                                    ● Terhubung
-                                </em>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- FEEDER 3 -->
-
-                    <div class="feeder-column">
-
-                        <div
-                            class="feeder component"
-                            data-component="feeder3">
-
-                            <div class="device-icon">
-                                ▤
-                            </div>
-
-                            <div class="device-info">
-
-                                <strong>
-                                    Feeder 3
-                                </strong>
-
-                                <span>
-                                    MCCB/MCB
-                                </span>
-
-                                <small>
-                                    380/220 V
-                                </small>
-
-                                <em>
-                                    ● Aktif
-                                </em>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="phase-connection">
-                            <i></i>
-                            <i></i>
-                            <i></i>
-                        </div>
-
-
-                        <div
-                            class="load component"
-                            data-component="load3">
-
-                            <div class="load-icon">
-                                ▣
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Beban 3
-                                </strong>
-
-                                <span>
-                                    Outgoing Feeder
-                                </span>
-
-                                <small>
-                                    380/220 V
-                                </small>
-
-                                <em>
-                                    ● Terhubung
-                                </em>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- FEEDER 4 -->
-
-                    <div class="feeder-column">
-
-                        <div
-                            class="feeder component"
-                            data-component="feeder4">
-
-                            <div class="device-icon">
-                                ▤
-                            </div>
-
-                            <div class="device-info">
-
-                                <strong>
-                                    Feeder 4
-                                </strong>
-
-                                <span>
-                                    MCCB/MCB
-                                </span>
-
-                                <small>
-                                    380/220 V
-                                </small>
-
-                                <em>
-                                    ● Aktif
-                                </em>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="phase-connection">
-                            <i></i>
-                            <i></i>
-                            <i></i>
-                        </div>
-
-
-                        <div
-                            class="load component"
-                            data-component="load4">
-
-                            <div class="load-icon">
-                                ▣
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Beban 4
-                                </strong>
-
-                                <span>
-                                    Outgoing Feeder
-                                </span>
-
-                                <small>
-                                    380/220 V
-                                </small>
-
-                                <em>
-                                    ● Terhubung
-                                </em>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- FEEDER 5 -->
-
-                    <div class="feeder-column">
-
-                        <div
-                            class="feeder component"
-                            data-component="feeder5">
-
-                            <div class="device-icon">
-                                ▤
-                            </div>
-
-                            <div class="device-info">
-
-                                <strong>
-                                    Feeder 5
-                                </strong>
-
-                                <span>
-                                    MCCB/MCB
-                                </span>
-
-                                <small>
-                                    380/220 V
-                                </small>
-
-                                <em>
-                                    ● Aktif
-                                </em>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="phase-connection">
-                            <i></i>
-                            <i></i>
-                            <i></i>
-                        </div>
-
-
-                        <div
-                            class="load component"
-                            data-component="load5">
-
-                            <div class="load-icon">
-                                ▣
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Beban 5
-                                </strong>
-
-                                <span>
-                                    Outgoing Feeder
-                                </span>
-
-                                <small>
-                                    380/220 V
-                                </small>
-
-                                <em>
-                                    ● Terhubung
-                                </em>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- LEGEND -->
-
-            <div class="legend">
-
-                <strong>
-                    Kategori Legenda:
-                </strong>
-
-                <span>
-                    <i class="legend-source"></i>
-                    Sumber Listrik
-                </span>
-
-                <span>
-                    <i class="legend-panel"></i>
-                    Panel Distribusi (MDB)
-                </span>
-
-                <span>
-                    <i class="legend-protection"></i>
-                    Proteksi (MCCB / MCB)
-                </span>
-
-                <span>
-                    <i class="legend-busbar"></i>
-                    Busbar 3 Fasa (R-S-T)
-                </span>
-
-                <span>
-                    <i class="legend-outgoing"></i>
-                    Outgoing Feeder
-                </span>
 
             </div>
 
         </section>
 
 
-        <!-- =================================================
-             POPUP DETAIL KOMPONEN
-        ================================================== -->
-
-        <div
-            class="detail-modal"
-            id="detailModal"
-            aria-hidden="true"
-        >
-
-            <div
-                class="detail-backdrop"
-                id="detailBackdrop"
-            ></div>
-
-
-            <section
-                class="detail-modal-card"
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="detailName"
-            >
-
-                <div class="detail-modal-header">
-
-                    <div class="detail-modal-title">
-
-                        <span class="info-icon">
-                            ⓘ
-                        </span>
-
-                        <strong>
-                            Detail Komponen
-                        </strong>
-
-                    </div>
-
-
-                    <button
-                        class="detail-close"
-                        id="detailClose"
-                        type="button"
-                        aria-label="Tutup"
-                    >
-                        ×
-                    </button>
-
-                </div>
-
-
-                <div class="detail-content">
-
-                    <div class="detail-label">
-                        NAMA KOMPONEN
-                    </div>
-
-                    <h2 id="detailName">
-                        MCCB UTAMA
-                    </h2>
-
-
-                    <div class="divider"></div>
-
-
-                    <div class="detail-label">
-                        JENIS KOMPONEN
-                    </div>
-
-                    <div
-                        class="detail-badge"
-                        id="detailType"
-                    >
-                        Proteksi Utama (MCCB)
-                    </div>
-
-
-                    <div class="divider"></div>
-
-
-                    <div class="detail-label">
-                        INFORMASI DETAIL
-                    </div>
-
-                    <div
-                        class="detail-info"
-                        id="detailInfo"
-                    ></div>
-
-
-                    <div class="divider"></div>
-
-
-                    <div class="detail-label">
-                        KETERANGAN SINGKAT
-                    </div>
-
-                    <div
-                        class="detail-description"
-                        id="detailDescription"
-                    ></div>
-
-                </div>
-
-            </section>
-
-        </div>
-
     </main>
 
 
-    <footer>
+    <!-- =====================================================
+         POPUP DETAIL
+    ====================================================== -->
 
-        Mapping Distribusi Listrik Kantor
-        • Versi Visualisasi Interaktif
+    <div
+        class="detail-modal"
+        id="detailModal"
+        aria-hidden="true"
+    >
 
-    </footer>
+        <div
+            class="detail-backdrop"
+            id="detailBackdrop"
+        ></div>
 
 
-    <script src="./script.js"></script>
+        <div class="detail-popup">
+
+            <div class="detail-popup-header">
+
+                <div>
+
+                    <span class="detail-info-icon">
+                        ⓘ
+                    </span>
+
+                    <strong>
+                        Detail Komponen
+                    </strong>
+
+                </div>
+
+
+                <button
+                    id="detailClose"
+                    class="detail-close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="detail-body">
+
+                <label>
+                    NAMA KOMPONEN
+                </label>
+
+                <h2 id="detailName">
+                    FEEDER 4
+                </h2>
+
+
+                <div class="detail-divider"></div>
+
+
+                <label>
+                    JENIS KOMPONEN
+                </label>
+
+                <div
+                    class="detail-type"
+                    id="detailType"
+                >
+                    Outgoing Feeder
+                </div>
+
+
+                <div class="detail-divider"></div>
+
+
+                <label>
+                    INFORMASI DETAIL
+                </label>
+
+                <div
+                    id="detailInfo"
+                    class="detail-information"
+                ></div>
+
+
+                <div class="detail-divider"></div>
+
+
+                <label>
+                    KETERANGAN SINGKAT
+                </label>
+
+                <div
+                    id="detailDescription"
+                    class="detail-description"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
